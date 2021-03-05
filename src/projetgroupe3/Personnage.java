@@ -1,0 +1,61 @@
+package projetgroupe3;
+
+import java.util.ArrayList;
+
+public class Personnage {
+	private String name;
+	private int pV=5;
+	private ArrayList<Item>inventaire= new ArrayList<Item>();
+	private boolean alive=true;
+	
+	
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	
+	public int getPV() {
+		return pV;
+	}
+	
+	public void setPV(int PV) {
+		pV = PV;
+	}
+
+
+
+	public ArrayList<Item> getInventaire() {
+		return inventaire;
+	}
+
+	public void setInventaire(ArrayList<Item> inventaire) {
+		this.inventaire = inventaire;
+	}
+
+
+	public void dead() {
+		alive=false;	
+	}
+	
+	// permet au Personnage de se soigner s’il possède une potion dans son inventaire
+	public void UsePotion() {
+		int heal=3;
+		int i=0;
+		while ((i<getInventaire().size()) & (getInventaire().get(i)!=Item.Potion)) {
+			i++;
+		}
+		if (getInventaire().get(i)==Item.Potion) {
+			setPV(this.getPV()+heal);
+			inventaire.remove(i);
+		}
+	}
+
+	
+
+}
