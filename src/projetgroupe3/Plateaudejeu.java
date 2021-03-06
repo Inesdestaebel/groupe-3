@@ -1,6 +1,6 @@
 package projetgroupe3;
 
-
+//test
 import java.util.Random;
 
 public class Plateaudejeu {
