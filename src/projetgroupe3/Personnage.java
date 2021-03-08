@@ -75,31 +75,19 @@ public class Personnage {
 		}
 	}
 
-	
-	
-	/*
-	//Pour la classe Plateaudejeu j'ai pensé à ça
-	//petite methode pour ajouter un Peronnage dans une partie sur un Plateaudejeu 
-	public Personnage addPlayer {
-		Scanner sc= new Scanner(System.in);
-		Random r = new Random();
-		int x=r.nextInt(this.X);
-		int y=r.nextInt(this.Y);
-		while (plateau[x][y]!='?') {
-			int x=r.nextInt(this.X);
-			int y=r.nextInt(this.Y);	
+	@Override
+	public String toString() {
+		if (alive){
+			return "[name=" + name + ", pV=" + pV + ", inventaire=" + inventaire + "]";
+
 		}
-		int[]pos= {x,y};
-		System.out.println("Votre nom de Personnage");
-		String name=sc.next();
-		Personnage player=new Personnage(name,pos );
-		this.plateau[x][y]='H' //H designera le personnage lors de l'affichage du plateau.
-		sc.close();
-		return player;
+		else {
+			return "[name=" + name+" is dead !!!]";
+		}
 	}
+
 	
 	
-	*/
 	
 
 }
