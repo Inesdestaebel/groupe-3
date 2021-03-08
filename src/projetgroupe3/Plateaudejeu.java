@@ -163,7 +163,7 @@ public class Plateaudejeu {
 		
 		public  void setListPersonnage() {
 			for (int i=0; i<nbjoueur; i++) {
-				listPesronnage[i]=addPlayer();	
+				listPesronnage[i]=this.addPlayer();	
 			}
 		
 			
@@ -178,6 +178,8 @@ public class Plateaudejeu {
 				}
 			System.out.println();
 			}
+			System.out.println(this.listPesronnage);
+
 		}
 
 		
@@ -185,17 +187,17 @@ public class Plateaudejeu {
 		public Personnage addPlayer() {
 			Scanner sc= new Scanner(System.in);
 			Random r = new Random();
-			int x=r.nextInt(this.X);
-			int y=r.nextInt(this.Y);
+			int x=r.nextInt(X);
+			int y=r.nextInt(Y);
 			while (plateau[x][y]!=' ') {
-				 x=r.nextInt(this.X);
-				 y=r.nextInt(this.Y);	
+				 x=r.nextInt(X);
+				 y=r.nextInt(Y);	
 			}
 			int[]pos= {x,y};
 			System.out.println("Entrez votre nom de Personnage :");
 			String name=sc.next();
 			Personnage player=new Personnage(name,pos);
-			this.plateau[x][y]='H'; //H designera le personnage lors de l'affichage du plateau.
+			plateau[x][y]='H'; //H designera le personnage lors de l'affichage du plateau.
 			sc.close();
 			return player;
 		}

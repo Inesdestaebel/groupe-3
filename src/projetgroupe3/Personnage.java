@@ -1,8 +1,7 @@
 package projetgroupe3;
 
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+
 
 public class Personnage {
 	private String name;
