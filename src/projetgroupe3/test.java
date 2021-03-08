@@ -29,11 +29,7 @@ public class test {
 
 		
 		Plateaudejeu partie1= new Plateaudejeu(X,Y,murs,piege,potion,joueur);
-		partie1.afficher();
-
-		//ne fonctionne pas avec un nombre de joueur superieur à 1, problème dans la fonction addPlayer 
-		
-		
+		partie1.afficher();		
 		sc.close();
 		System.out.println("termine");
 	}
