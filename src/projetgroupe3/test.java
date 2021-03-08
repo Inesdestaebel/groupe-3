@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 public class test {
 	public static void main(String[] args){
+		
+		int[] pos= {0,0};
+		Personnage petitjoueur= new Personnage("Petit Joueur", pos);
+		
+		System.out.println(petitjoueur);
 		Scanner sc= new Scanner(System.in);
 		System.out.println("Dimention du plateau svp:");
 		int X=sc.nextInt();
@@ -25,9 +30,10 @@ public class test {
 		
 		Plateaudejeu partie1= new Plateaudejeu(X,Y,murs,piege,potion,joueur);
 		partie1.afficher();
-		int[] pos= {0,0};
-		Personnage petitjoueur= new Personnage("Petit Joueur", pos);
-		System.out.println(petitjoueur);
+
+		//ne fonctionne pas avec un nombre de joueur superieur à 1, problème dans la fonction addPlayer 
+		
+		
 		sc.close();
 		
 	}

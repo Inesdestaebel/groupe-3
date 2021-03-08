@@ -11,7 +11,7 @@ public class Plateaudejeu {
 		private int potions;
 		private char[][] plateau;
 		private int nbjoueur=1;
-		private Personnage[] listPesronnage= new Personnage[nbjoueur];
+		private Personnage[] listPesronnage= new Personnage[nbjoueur+1];
 
 		//Constructeur
 		public Plateaudejeu(int X, int Y, int murs, int pieges, int potion,int nbjoueur) {
@@ -76,6 +76,7 @@ public class Plateaudejeu {
 					}
 				}
 			}
+			setListPersonnage();
 		}
 		
 		
@@ -163,7 +164,8 @@ public class Plateaudejeu {
 		
 		public  void setListPersonnage() {
 			for (int i=0; i<nbjoueur; i++) {
-				listPesronnage[i]=this.addPlayer();	
+				System.out.println("Joueur "+i+':');
+				listPesronnage[i]=addPlayer();	
 			}
 		
 			
@@ -178,7 +180,10 @@ public class Plateaudejeu {
 				}
 			System.out.println();
 			}
-			System.out.println(this.listPesronnage);
+			for (int i=0; i<nbjoueur; i++) {
+				System.out.println(getListPesronnage()[i]);
+
+			}
 
 		}
 
