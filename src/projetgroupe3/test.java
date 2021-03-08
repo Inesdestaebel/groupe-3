@@ -35,6 +35,6 @@ public class test {
 		
 		
 		sc.close();
-		
+		System.out.println("termine");
 	}
 }
