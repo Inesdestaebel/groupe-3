@@ -11,15 +11,17 @@ public class Plateaudejeu {
 		private int potions;
 		//private int nbjoueur;
 		private char[][] plateau;
+		private char[][] plateauPerso;
 		//private Personnage[] listPesronnage;
 
+		
 		//Constructeur
 		public Plateaudejeu(int X, int Y, int murs, int pieges, int potion) {
 			setX(X);
 			setY(Y);
 			//setNbjoueur(nbjoueur);
 			setMursPiegesPotion(murs, pieges, potion);
-			
+			setPlateauPerso();
 			plateau = new char[X][Y];
 			
 			
@@ -80,7 +82,30 @@ public class Plateaudejeu {
 		}
 		
 		
+		public void setPlateauPerso(){
+			char[][] plateauPerso= new char[getX()][getY()];
+			for (int i=0; i<getX(); i++) {
+				for (int j=0; j<getY(); j++) {
+					plateauPerso[i][j]='?';
+				}
+			}
+			this.plateauPerso=plateauPerso;
+		}
+		public void setOnePlateauPerso(char c, int[]pos) {
+			plateauPerso[pos[0]][pos[1]]=c;
+		}
 		
+		
+		public void afficherPlateauPerso() {
+
+			for ( int x = 0 ; x<X; x++ ) {
+				for ( int y = 0 ; y<Y; y++ ) {
+					System.out.print(plateauPerso[x][y]);
+				}
+			System.out.println();
+			}
+
+			}
 		
 		public int getMurs() {
 			return murs;
@@ -210,9 +235,11 @@ public class Plateaudejeu {
 			}
 			int[]pos= {x,y};
 			Personnage player=new Personnage(name,pos);
-			plateau[x][y]='H'; //H designera le personnage lors de l'affichage du plateau.
+			plateau[x][y]='H'; 
+			plateauPerso[x][y]='H';			//H designera le personnage lors de l'affichage du plateau.
 			return player;
 		}
 		
+		//public void reveal(int[2] coord)
 }
 

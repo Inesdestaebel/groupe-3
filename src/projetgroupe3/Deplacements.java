@@ -10,50 +10,52 @@ public class Deplacements{
 
 	}
 	
-	public void Dep(Personnage H, Plateaudejeu P, String dep, char[][] plateau2) {
+	public void Dep(Personnage H, Plateaudejeu P, String dep) {
 		int[] pos = H.getPosition();
 		int x = pos[0];
 		int y = pos[1];
 		if(dep.equals("Z")) {
 			System.out.println("Je descend.");
+			int[] pos2 = {x+1,y};
+			P.setOnePlateauPerso(P.valeurcase(x, y), pos2);
+			
 			if (P.valeurcase(x+1, y)!='#') {
-				int[] pos2 = {x+1,y};
+				
 				H.setPosition(pos2);
-				plateau2[x][y]=P.valeurcase(x, y);
+				
 			}
 		}
 		else if(dep.equals("S")) {
 			System.out.println("Je monte.");
+			int[] pos2 = {x-1,y};
+			P.setOnePlateauPerso(P.valeurcase(x, y), pos2);			} 
 			if (P.valeurcase(x-1, y)!='#') {
-				int[] pos2 = {x-1,y};
 				H.setPosition(pos2);
-				plateau2[x][y]=P.valeurcase(x, y);
-			} 
 		}
 		else if(dep.equals("Q")) {
 			System.out.println("A gauche.");
+			int[] pos2 = {x,y-1};
+			P.setOnePlateauPerso(P.valeurcase(x, y), pos2);				} 
 				if (P.valeurcase(x, y-1)!='#') {
-					int[] pos2 = {x,y-1};
+					
 					H.setPosition(pos2);
-					plateau2[x][y]=P.valeurcase(x, y);
-				} 
 		}
 		else if (dep.equals("D")){
 			System.out.println("A droite.");
-			if (P.valeurcase(x, y+1)!='#') {
 			int[] pos2 = {x,y+1};
+			P.setOnePlateauPerso(P.valeurcase(x, y), pos2);	
+			if (P.valeurcase(x, y+1)!='#') {
 			H.setPosition(pos2);
-			plateau2[x][y]=P.valeurcase(x, y);
-		}
+				}
 		}
 		}	
 
 
-	public void Move(String S, Personnage H, Plateaudejeu P, char[][] plateau2) {
+	public void Move(String S, Personnage H, Plateaudejeu P) {
 		for(int i=0; i<S.length();i++) {
 			String x = S.substring(i,i+1);
 			System.out.println("Déplacement:"+x);
-			Dep(H,P,x,plateau2);
+			Dep(H,P,x);
 			H.getPosition();
 		}
 		}

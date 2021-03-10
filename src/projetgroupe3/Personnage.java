@@ -9,10 +9,8 @@ public class Personnage {
 	private ArrayList<Item>inventaire= new ArrayList<Item>();
 	private boolean alive=true;
 	private int[] position= new int[2];
-	
-	
-	
 
+	
 	public Personnage(String name, int[]position) {
 		setName(name);
 		setPosition(position);

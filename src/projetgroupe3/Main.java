@@ -22,26 +22,17 @@ public class Main {
 		String name =s.next();
 		//plateau.addPlayer(name);
 		Personnage H = plateau.addPlayer(name);
-		
+		plateau.afficherPlateauPerso();
+		plateau.afficher();
 
 		//plateau.afficher();
 		
 		//Plateau que le joueur verra, on changera les valeurs en introduisant les valeurs 
 		//DOIS JE METTRE CA DANS UNE AUTRE CLASSE?
-		char[][] plateaujoueur = new char[X][Y];
-		for ( int x = 0 ; x<X; x++ ) {
-			for ( int y = 0 ; y<Y; y++ ) {
-				if (plateau.valeurcase(x, y)=='H') {
-					plateaujoueur[x][y]='H';
-				}
-				else {
-				plateaujoueur[x][y]= '?';
-				}
-				System.out.print(plateaujoueur[x][y]);
-			}
-			System.out.println();
-		}
-	
+		
+		
+		
+		
 			
 			//Déplacements du joueur
 			System.out.println("Veuillez entrer vos déplacements");
@@ -52,13 +43,11 @@ public class Main {
 			}
 			//Utilisation des fonctions de déplacement
 			Deplacements D = new Deplacements(H,plateau);
-			D.Move(move, H, plateau,plateaujoueur);
-			for ( int x = 0 ; x<X; x++ ) {
-				for ( int y = 0 ; y<Y; y++ ) {
-					System.out.print(plateaujoueur[x][y]);
-				}
-				System.out.println();
-			}
+			D.Move(move, H, plateau);
+			plateau.afficherPlateauPerso();
+			plateau.afficher();
+
+
 			}
 		}
 
