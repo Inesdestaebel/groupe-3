@@ -23,8 +23,6 @@ public class Main {
 		//plateau.addPlayer(name);
 		Personnage H = plateau.addPlayer(name);
 		plateau.afficherPlateauPerso();
-		plateau.afficher();
-
 		//plateau.afficher();
 		
 		//Plateau que le joueur verra, on changera les valeurs en introduisant les valeurs 
@@ -45,7 +43,8 @@ public class Main {
 			Deplacements D = new Deplacements(H,plateau);
 			D.Move(move, H, plateau);
 			plateau.afficherPlateauPerso();
-			plateau.afficher();
+			System.out.println(H);
+			//plateau.afficher();
 
 
 			}

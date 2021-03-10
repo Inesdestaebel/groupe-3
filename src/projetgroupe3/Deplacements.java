@@ -17,35 +17,50 @@ public class Deplacements{
 		if(dep.equals("Z")) {
 			System.out.println("Je descend.");
 			int[] pos2 = {x+1,y};
-			P.setOnePlateauPerso(P.valeurcase(x, y), pos2);
-			
+			P.setOnePlateauPerso(P.valeurcase(pos2[0],pos2[1]), pos2);
 			if (P.valeurcase(x+1, y)!='#') {
-				
+				P.setOnePlateau(' ',pos);
 				H.setPosition(pos2);
+				P.setOnePlateau('H',pos2);
+				P.setOnePlateauPerso('H', pos2);
+				P.setOnePlateauPerso(' ',pos);
 				
 			}
 		}
 		else if(dep.equals("S")) {
 			System.out.println("Je monte.");
 			int[] pos2 = {x-1,y};
-			P.setOnePlateauPerso(P.valeurcase(x, y), pos2);			} 
+			P.setOnePlateauPerso(P.valeurcase(pos2[0],pos2[1]), pos2);		 
 			if (P.valeurcase(x-1, y)!='#') {
+				P.setOnePlateau(' ',pos);
 				H.setPosition(pos2);
+				P.setOnePlateau('H',pos2);
+				P.setOnePlateauPerso('H', pos2);
+				P.setOnePlateauPerso(' ',pos);
+		}
 		}
 		else if(dep.equals("Q")) {
 			System.out.println("A gauche.");
 			int[] pos2 = {x,y-1};
-			P.setOnePlateauPerso(P.valeurcase(x, y), pos2);				} 
+			P.setOnePlateauPerso(P.valeurcase(pos2[0],pos2[1]), pos2);				
 				if (P.valeurcase(x, y-1)!='#') {
-					
+					P.setOnePlateau(' ',pos);
 					H.setPosition(pos2);
+					P.setOnePlateau('H',pos2);
+					P.setOnePlateauPerso('H', pos2);
+					P.setOnePlateauPerso(' ',pos);
+		}
 		}
 		else if (dep.equals("D")){
 			System.out.println("A droite.");
 			int[] pos2 = {x,y+1};
-			P.setOnePlateauPerso(P.valeurcase(x, y), pos2);	
+			P.setOnePlateauPerso(P.valeurcase(pos2[0],pos2[1]), pos2);
 			if (P.valeurcase(x, y+1)!='#') {
-			H.setPosition(pos2);
+				P.setOnePlateau(' ',pos);
+				H.setPosition(pos2);
+				P.setOnePlateau('H',pos2);
+				P.setOnePlateauPerso('H', pos2);
+				P.setOnePlateauPerso(' ',pos);
 				}
 		}
 		}	

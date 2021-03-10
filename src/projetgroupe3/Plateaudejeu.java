@@ -12,6 +12,7 @@ public class Plateaudejeu {
 		//private int nbjoueur;
 		private char[][] plateau;
 		private char[][] plateauPerso;
+		private int[] obj= new int[2];
 		//private Personnage[] listPesronnage;
 
 		
@@ -37,6 +38,8 @@ public class Plateaudejeu {
 			int v1 = r.nextInt(X); 
 			int v2 = r.nextInt(Y);
 			plateau[v1][v2]='V';
+			int[] obj = {v1,v2};
+			this.obj=obj;
 			
 
 			
@@ -81,6 +84,9 @@ public class Plateaudejeu {
 		//	setListPersonnage();
 		}
 		
+		public void setOnePlateau(char c, int[]pos) {
+			plateau[pos[0]][pos[1]]=c;
+		}
 		
 		public void setPlateauPerso(){
 			char[][] plateauPerso= new char[getX()][getY()];
