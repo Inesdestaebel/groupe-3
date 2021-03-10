@@ -33,25 +33,30 @@ public class Main {
 		
 			
 			//Déplacements du joueur
-			System.out.println("Veuillez entrer vos déplacements");
-			String move = s.next();
-			while (move.length()!=4) {
-				System.out.println("Entrez 4 mouvements");
-				move = s.next();
+
+		Deplacements D = new Deplacements(H,plateau);
+			while(!D.getVictoire()) {
+				
+				System.out.println("Veuillez entrer vos déplacements");
+				String move = s.next();
+				while (move.length()!=4) {
+					System.out.println("Entrez 4 mouvements");
+					move = s.next();
+				}
+				//Utilisation des fonctions de déplacement
+				
+				D.Move(move, H, plateau);
+				plateau.afficherPlateauPerso();
+				System.out.println(H);
+				plateau.afficher();
 			}
-			//Utilisation des fonctions de déplacement
-			Deplacements D = new Deplacements(H,plateau);
-			while(H.getPosition()!=)
-			D.Move(move, H, plateau);
-			plateau.afficherPlateauPerso();
-			System.out.println(H);
-			//plateau.afficher();
+			System.out.println("victoire!");
 
 
 			}
 		}
 
-
+	
 
 
 

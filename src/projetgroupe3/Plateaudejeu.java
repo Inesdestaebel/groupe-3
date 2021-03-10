@@ -113,6 +113,11 @@ public class Plateaudejeu {
 
 			}
 		
+		
+		public int[] getObj() {
+			return obj;
+		}
+		
 		public int getMurs() {
 			return murs;
 		}
