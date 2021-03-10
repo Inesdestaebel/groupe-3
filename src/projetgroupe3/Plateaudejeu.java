@@ -9,15 +9,15 @@ public class Plateaudejeu {
 		private int murs;
 		private int pieges;
 		private int potions;
-		private int nbjoueur;
+		//private int nbjoueur;
 		private char[][] plateau;
-		private Personnage[] listPesronnage;
+		//private Personnage[] listPesronnage;
 
 		//Constructeur
-		public Plateaudejeu(int X, int Y, int murs, int pieges, int potion,int nbjoueur) {
+		public Plateaudejeu(int X, int Y, int murs, int pieges, int potion) {
 			setX(X);
 			setY(Y);
-			setNbjoueur(nbjoueur);
+			//setNbjoueur(nbjoueur);
 			setMursPiegesPotion(murs, pieges, potion);
 			
 			plateau = new char[X][Y];
@@ -76,7 +76,7 @@ public class Plateaudejeu {
 					}
 				}
 			}
-			setListPersonnage();
+		//	setListPersonnage();
 		}
 		
 		
@@ -96,7 +96,7 @@ public class Plateaudejeu {
 		}
 
 		public void setMursPiegesPotion(int murs, int pieges, int potion) {
-			if (murs+pieges+potion+getNbjoueur()<X*Y) {
+			if (murs+pieges+potion<X*Y) {
 				this.murs = murs;
 				this.potions=potion;
 				this.pieges=pieges;
@@ -110,21 +110,21 @@ public class Plateaudejeu {
 		}
 		
 		
-		public int getNbjoueur() {
-			return nbjoueur;
-		}
+		//public int getNbjoueur() {
+		//	return nbjoueur;
+		//}
 
 
-		public void setNbjoueur(int nbjoueur) {
-			if (nbjoueur>0) {
-				this.nbjoueur = nbjoueur;
+		//public void setNbjoueur(int nbjoueur) {
+			//if (nbjoueur>0) {
+			//	this.nbjoueur = nbjoueur;
 
-			}
-			else {
-				System.err.println(nbjoueur+ " <0 impossible de creer un plateau nbJoueurNegatif ");
+		//	}
+			//else {
+				//System.err.println(nbjoueur+ " <0 impossible de creer un plateau nbJoueurNegatif ");
 
-			}
-		}
+		//	}
+		//}
 		
 
 
@@ -159,23 +159,23 @@ public class Plateaudejeu {
 		
 		
 
-		public Personnage[] getListPesronnage() {
-			return listPesronnage;
-		}
+	//	public Personnage[] getListPesronnage() {
+	//		return listPesronnage;
+	//	}
 
 		
-		public  void setListPersonnage() {
-			this.listPesronnage = new Personnage[nbjoueur];
-			Scanner sc=new Scanner(System.in);
-			for (int i=0; i<listPesronnage.length; i++) {
-				System.out.println("Joueur "+(i+1)+" donnez votre nom:");
-				String name=sc.next();
-				listPesronnage[i]=addPlayer(name);	
-			}
-			sc.close();
+		//public  void setListPersonnage() {
+		//	this.listPesronnage = new Personnage[nbjoueur];
+		//	Scanner sc=new Scanner(System.in);
+		//	for (int i=0; i<listPesronnage.length; i++) {
+		//		System.out.println("Joueur "+(i+1)+" donnez votre nom:");
+		//		String name=sc.next();
+		//		listPesronnage[i]=addPlayer(name);	
+		//	}
+		//	sc.close();
 		
 			
-		}
+	//	}
 
 
 		public void afficher() {
@@ -186,12 +186,12 @@ public class Plateaudejeu {
 				}
 			System.out.println();
 			}
-			for (int i=0; i<getListPesronnage().length; i++) {
-				System.out.println(getListPesronnage()[i]);
+		//	for (int i=0; i<getListPesronnage().length; i++) {
+		//		System.out.println(getListPesronnage()[i]);
 
 			}
 
-		}
+		//}
 
 		public char valeurcase (int x, int y) {
 			return plateau[x][y];
@@ -215,3 +215,4 @@ public class Plateaudejeu {
 		}
 		
 }
+
