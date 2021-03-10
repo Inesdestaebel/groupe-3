@@ -41,6 +41,7 @@ public class Main {
 			}
 			//Utilisation des fonctions de déplacement
 			Deplacements D = new Deplacements(H,plateau);
+			while(H.getPosition()!=)
 			D.Move(move, H, plateau);
 			plateau.afficherPlateauPerso();
 			System.out.println(H);
