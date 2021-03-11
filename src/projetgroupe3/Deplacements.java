@@ -161,6 +161,7 @@ public class Deplacements{
 			pos2= pos;
 			if (getCaseActu()=='P') {
 				H.addPotion();
+				setCaseActu(' ');
 				System.out.println("Vous ramassez une potion, 'E' pour utiliser");
 
 			}
@@ -172,6 +173,7 @@ public class Deplacements{
 		else if (dep.equals("E")) {
 			H.usePotion();
 			pos2= pos;
+			
 		}
 		else {
 			pos2= pos;
