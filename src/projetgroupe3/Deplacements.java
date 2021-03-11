@@ -134,29 +134,54 @@ public class Deplacements{
 		int x = pos[0];
 		int y = pos[1];
 		int[] pos2=new int[2];
-		if(dep.equals("Z")) {
+		if(dep.equals("S")) {
 			System.out.println("Je descend.");
-			pos2[0] =x+1;
-			pos2[1]=y;
+			if(P.getX()>x+1) {
+				pos2[0] =x+1;
+				pos2[1]=y;
+			}
+			else {
+				System.out.println("Vous allez sortir du plateau, déplacement annulé.");
+				pos2=pos;
+			}
 		}
-		else if(dep.equals("S")) {
+		
+		else if(dep.equals("Z")) {
 			System.out.println("Je monte.");
-			pos2[0] = x-1;
-			pos2[1]=y;
+			if(x-1>=0) {
+				pos2[0] = x-1;
+				pos2[1]=y;
+			}
+			else {
+				System.out.println("Vous allez sortir du plateau, déplacement annulé.");
+				pos2=pos;
+			}
 		
 		}
 		else if(dep.equals("Q")) {
 			System.out.println("A gauche.");
-			pos2[0] = x;
-			pos2[1]=y-1;
-
+			if(y-1>=0) {
+				pos2[0] = x;
+				pos2[1]=y-1;
+			}
+			else {
+				System.out.println("Vous allez sortir du plateau, déplacement annulé.");
+				pos2=pos;
+			}
 		}
+		
 		else if (dep.equals("D")){
 			System.out.println("A droite.");
+			if(P.getY()>y+1) {
 			pos2[0] = x;
-			pos2[1]=y+1;
-			
+			pos2[1]=y+1;	
 		}
+			else {
+				System.out.println("Vous allez sortir du plateau, déplacement annulé.");
+				pos2=pos;
+			}
+		}
+		
 		else if (dep.equals("R")) {
 			pos2= pos;
 			if (getCaseActu()=='P') {
@@ -175,7 +200,8 @@ public class Deplacements{
 		}
 		else {
 			pos2= pos;
-		}
+			System.out.println("Ceci n'est pas une action valide.");
+			}
 		
 		
 		P.setOnePlateauPerso(P.valeurcase(pos2[0],pos2[1]), pos2);
@@ -191,6 +217,9 @@ public class Deplacements{
 			P.setOnePlateauPerso('H', pos2);
 			
 			}
+		else {
+			System.out.println("Il y a un mur, le déplacement est annulé.");
+		}
 		
 		
 		if (getCaseActu()=='P'){

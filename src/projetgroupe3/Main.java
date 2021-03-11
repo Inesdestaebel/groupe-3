@@ -23,6 +23,13 @@ public class Main {
 		//plateau.addPlayer(name);
 		Personnage H = plateau.addPlayer(name);
 		plateau.afficherPlateauPerso();
+		System.out.println(H);
+		System.out.println("Z vous permet de monter.");
+		System.out.println("S vous permet de descendre.");
+		System.out.println("D vous permet d'aller à droite.");
+		System.out.println("Q vous permet d'aller à gauche.");
+		System.out.println("R vous permet de ramasser un objet.");
+		System.out.println("E vous permet d'utiliser une potion.");
 		//plateau.afficher();
 		
 		//Plateau que le joueur verra, on changera les valeurs en introduisant les valeurs 
@@ -35,12 +42,11 @@ public class Main {
 			//Déplacements du joueur
 
 		Deplacements D = new Deplacements(H,plateau);
-			while(!D.getVictoire()) {
-				
-				System.out.println("Veuillez entrer vos déplacements");
+			while(!D.getVictoire() && H.isAlive()) {
+				System.out.println("Veuillez entrer vos 4 actions :");
 				String move = s.next();
 				while (move.length()!=4) {
-					System.out.println("Entrez 4 mouvements");
+					System.out.println("Entrez 4 actions...");
 					move = s.next();
 				}
 				//Utilisation des fonctions de déplacement
@@ -48,11 +54,12 @@ public class Main {
 				D.Move(move, H, plateau);
 				plateau.afficherPlateauPerso();
 				System.out.println(H);
-				plateau.afficher();
+				//plateau.afficher();
 			}
 			
 			if (H.isAlive()) {
 				System.out.println("Victoire!");
+				plateau.afficher();
 			}
 			}
 		}
