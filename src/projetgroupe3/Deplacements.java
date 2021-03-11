@@ -1,6 +1,7 @@
 package projetgroupe3;
 
-public class Deplacements{
+
+/*public class Deplacements{
 	private Personnage H;
 	private Plateaudejeu P;
 	private boolean victoire=false;
@@ -106,6 +107,127 @@ public class Deplacements{
 	// ensuite la position actuelle du joueur va devenir "" donc un espace vide
 	// puis la position selon ce que le joueur a rentré deviendra pos soit comment on a appelé le joueur sur le plateau
 	// la seule chose qu'il faut bouger c'est le plateau [x][y] il faudrait remplacer par les coordonnés des joueurs mais je sais pas comment les récupérer.
+*/
+public class Deplacements{
+	private Personnage H;
+	private Plateaudejeu P;
+	private boolean victoire=false;
+	private char caseActu;
+	// on va partir sur une base Z Q S D avec Z = devant Q = gauche S= derrière et D = droite (ce qui est le plus fréquemment utilisé dans les jeux)
+	// on se base sur un axe X Y donc pour se déplacer horizontalement, le x varie & verticalement le y varie
+	
 
+	public Deplacements(Personnage H, Plateaudejeu P) {
+
+	}
+	public char getCaseActu(){
+		return caseActu;
+	}
+	public void setCaseActu(char c) {
+		this.caseActu=c;
+	}
+	
+	
+	public void Dep(Personnage H, Plateaudejeu P, String dep) {
+		
+		int[] pos = H.getPosition();
+		int x = pos[0];
+		int y = pos[1];
+		int[] pos2=new int[2];
+		if(dep.equals("Z")) {
+			System.out.println("Je descend.");
+			pos2[0] =x+1;
+			pos2[1]=y;
+		}
+		else if(dep.equals("S")) {
+			System.out.println("Je monte.");
+			pos2[0] = x-1;
+			pos2[1]=y;
+		
+		}
+		else if(dep.equals("Q")) {
+			System.out.println("A gauche.");
+			pos2[0] = x;
+			pos2[1]=y-1;
+
+		}
+		else if (dep.equals("D")){
+			System.out.println("A droite.");
+			pos2[0] = x;
+			pos2[1]=y+1;
+			
+		}
+		else if (dep.equals("R")) {
+			pos2= pos;
+			if (getCaseActu()=='P') {
+				H.addPotion();
+				System.out.println("Vous ramassez une potion, 'E' pour utiliser");
+
+			}
+			else {
+				System.out.println("Vous essayez de ramasser une potion mais il n'y a rien par terre...");
+			}
+		
+		}
+		else if (dep.equals("E")) {
+			H.usePotion();
+			pos2= pos;
+		}
+		else {
+			pos2= pos;
+		}
+		
+		
+		P.setOnePlateauPerso(P.valeurcase(pos2[0],pos2[1]), pos2);
+		if (P.valeurcase(pos2[0], pos2[1])==P.valeurcase(P.getObj()[0],P.getObj()[1])) {
+			cestGagne();
+		}
+		else if (P.valeurcase(pos2[0], pos2[1])!='#') {
+			P.setOnePlateau(getCaseActu(),pos);
+			P.setOnePlateauPerso(getCaseActu(),pos);
+			setCaseActu(P.valeurcase(pos2[0],pos2[1]));
+			H.setPosition(pos2);
+			P.setOnePlateau('H',pos2);
+			P.setOnePlateauPerso('H', pos2);
+			
+			}
+		
+		
+		if (getCaseActu()=='P'){
+				System.out.println("Vous marchez sur une potion, une fois sur la case, 'R' pour la ramasser");
+		}
+		else if (getCaseActu()=='~') {
+			System.out.println("Vous marchez sur un piege!! -2PV !!");
+			H.trap();
+
+		}
+		if (H.getPV()<1) {
+			System.out.println("Vous etes mort/n GAME OVER");
+			H.dead();
+		}
+		}
+		
+
+
+	public void Move(String S, Personnage H, Plateaudejeu P) {
+		int i=0;
+		while((i<S.length())&&(!getVictoire())&&(H.isAlive())) {
+			String x = S.substring(i,i+1);
+			System.out.println("Déplacement:"+x);
+			Dep(H,P,x);
+			H.getPosition();
+			i++;
+		}
+		}
+	
+	public boolean getVictoire() {
+		return victoire;
+	}
+	public void cestGagne() {
+		victoire=true;
+	}
+			
+	
+	}
 
 

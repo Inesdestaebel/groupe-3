@@ -50,9 +50,10 @@ public class Main {
 				System.out.println(H);
 				plateau.afficher();
 			}
-			System.out.println("victoire!");
-
-
+			
+			if (H.isAlive()) {
+				System.out.println("Victoire!");
+			}
 			}
 		}
 
