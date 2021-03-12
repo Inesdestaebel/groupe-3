@@ -1,7 +1,6 @@
 package projetgroupe3;
 
 import java.util.Scanner;
-import projetgroupe3.Deplacements;
 
 public class Main {
 
