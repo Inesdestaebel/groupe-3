@@ -72,70 +72,80 @@ public class Personnage {
 	}
 	
 	public void usePotion() {
+		
 		int heal=3;
-		int i=0;
-		while ((i<getInventaire().size()) & (getInventaire().get(i)!=Item.Potion)) {
-			i++;
-		}
-		if (getInventaire().get(i)==Item.Potion) {
-			setPV(this.getPV()+heal);
-			System.out.println("Vous utilisez une potion, +"+heal+" HP");
-			inventaire.remove(i);
+		if (!getInventaire().isEmpty()) {
+			int i=0;
+			while ((i<getInventaire().size()) & (getInventaire().get(i)!=Item.Potion)) {
+				i++;
+			}
+			if (getInventaire().get(i)==Item.Potion) {
+				setPV(this.getPV()+heal);
+				System.out.println("Vous utilisez une potion, +"+heal+" HP");
+				inventaire.remove(i);
+			}
+			else {
+				System.out.println("Vous n'avez pas de potion dans votre inventaire...");
+
+			}
 		}
 		else {
-			System.out.println("Vous n'avez pas de potion dans votre inventaire...");
+			System.out.println("Votre inventaire est vide");
 
 		}
+		
 	}
 
 	
-	
-	public void useBomb(Plateaudejeu p) {
-		
-		
-		int i=0;
-		while ((i<getInventaire().size()) & (getInventaire().get(i)!=Item.Bombe)) {
-			i++;
-		}
-		if (getInventaire().get(i)==Item.Bombe) {
-			if (getPosition()[0]+1<p.getX()) {
-				if (p.valeurcase(getPosition()[0]+1, getPosition()[1])=='#') {
-					int[] down={getPosition()[0]+1,getPosition()[1]};
-					p.setOnePlateau(' ',down);
-					p.setOnePlateauPerso(' ',down);;
-				}
+	// L'objet bombe detruit tous les murs autour du personnage lors de son utilisation
+	public void useBomb(Plateaudejeu p) {		
+		if (!getInventaire().isEmpty()) {
+			int i=0;
+			while ((i<getInventaire().size()) & (getInventaire().get(i)!=Item.Bombe)) {
+				i++;
 			}
-			
-			if (getPosition()[0]-1>=0) {
-				if (p.valeurcase(getPosition()[0]-1, getPosition()[1])=='#') {
-					int[] up ={getPosition()[0]-1,getPosition()[1]};
-					p.setOnePlateau(' ',up);
-					p.setOnePlateauPerso(' ',up);;
+			if (getInventaire().get(i)==Item.Bombe) {
+				if (getPosition()[0]+1<p.getX()) {
+					if (p.valeurcase(getPosition()[0]+1, getPosition()[1])=='#') {
+						int[] down={getPosition()[0]+1,getPosition()[1]};
+						p.setOnePlateau(' ',down);
+						p.setOnePlateauPerso(' ',down);;
+					}
 				}
-			}
-			
-			if (getPosition()[1]+1<p.getY()) {
-				if (p.valeurcase(getPosition()[0], getPosition()[1]+1)=='#') {
-					int[] right ={getPosition()[0],getPosition()[1]+1};
-					p.setOnePlateau(' ',right);
-					p.setOnePlateauPerso(' ',right);;
+				
+				if (getPosition()[0]-1>=0) {
+					if (p.valeurcase(getPosition()[0]-1, getPosition()[1])=='#') {
+						int[] up ={getPosition()[0]-1,getPosition()[1]};
+						p.setOnePlateau(' ',up);
+						p.setOnePlateauPerso(' ',up);;
+					}
 				}
-			}
-			
-			if (getPosition()[1]-1>=0) {
-				if (p.valeurcase(getPosition()[0], getPosition()[1]-1)=='#') {
-					int[] left = {getPosition()[0],getPosition()[1]-1};
+				
+				if (getPosition()[1]+1<p.getY()) {
+					if (p.valeurcase(getPosition()[0], getPosition()[1]+1)=='#') {
+						int[] right ={getPosition()[0],getPosition()[1]+1};
+						p.setOnePlateau(' ',right);
+						p.setOnePlateauPerso(' ',right);;
+					}
+				}
+				
+				if (getPosition()[1]-1>=0) {
+					if (p.valeurcase(getPosition()[0], getPosition()[1]-1)=='#') {
+						int[] left = {getPosition()[0],getPosition()[1]-1};
 
-					p.setOnePlateau(' ',left);
-					p.setOnePlateauPerso(' ',left);;
+						p.setOnePlateau(' ',left);
+						p.setOnePlateauPerso(' ',left);;
+					}
 				}
+				inventaire.remove(i);
 			}
-			inventaire.remove(i);
-		}
-		else {
-			System.out.println("Vous n'avez pas de bombe dans votre inventaire...");
+			else {
+				System.out.println("Vous n'avez pas de bombe dans votre inventaire...");
 
+			}
 		}
+		else System.out.println("Inventaire vide");
+		
 	}
 
 		
