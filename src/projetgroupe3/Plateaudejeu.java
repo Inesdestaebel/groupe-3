@@ -1,7 +1,6 @@
 package projetgroupe3;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class Plateaudejeu {
 		private int X;

@@ -97,7 +97,9 @@ public class Personnage {
 	}
 
 	
-	// L'objet bombe detruit tous les murs autour du personnage lors de son utilisation
+	// L'objet bombe detruit tous les murs autour du personnage lors de son utilisation. On en a une seule
+	//pour tout le jeu, il n'y en a pas sur le plateau. On a crée cet objet pour éviter d'être coincé entre 
+	//des murs lors d'une partie.
 	public void useBomb(Plateaudejeu p) {		
 		if (!getInventaire().isEmpty()) {
 			int i=0;
