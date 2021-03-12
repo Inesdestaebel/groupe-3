@@ -109,8 +109,6 @@ package projetgroupe3;
 	// la seule chose qu'il faut bouger c'est le plateau [x][y] il faudrait remplacer par les coordonnés des joueurs mais je sais pas comment les récupérer.
 */
 public class Deplacements{
-	private Personnage H;
-	private Plateaudejeu P;
 	private boolean victoire=false;
 	private char caseActu;
 	// on va partir sur une base Z Q S D avec Z = devant Q = gauche S= derrière et D = droite (ce qui est le plus fréquemment utilisé dans les jeux)
@@ -210,7 +208,7 @@ public class Deplacements{
 		if (P.valeurcase(pos2[0], pos2[1])==P.valeurcase(P.getObj()[0],P.getObj()[1])) {
 			cestGagne();
 		}
-		else if (P.valeurcase(pos2[0], pos2[1])!='#') {
+		else if ((P.valeurcase(pos2[0], pos2[1])!='#') && (pos2existe(pos2,P))) {
 			P.setOnePlateau(getCaseActu(),pos);
 			P.setOnePlateauPerso(getCaseActu(),pos);
 			setCaseActu(P.valeurcase(pos2[0],pos2[1]));
@@ -219,6 +217,10 @@ public class Deplacements{
 			P.setOnePlateauPerso('H', pos2);
 			
 			}
+		else if (!pos2existe(pos2,P)) {
+			System.out.println("Vous ne pouvez pas aller plus loin dans cette direction: "+dep);
+
+		}
 		else {
 			System.out.println("Il y a un mur, le déplacement est annulé.");
 		}
@@ -257,7 +259,13 @@ public class Deplacements{
 	public void cestGagne() {
 		victoire=true;
 	}
-			
+	public boolean pos2existe(int[] pos2, Plateaudejeu p) {
+		if ((pos2[0]<0)||(pos2[1]<0)||(pos2[0]>=p.getX())||(pos2[0]>=p.getY())){
+			return false;
+		}
+		else return true;
+	}
+	
 	
 	}
 
