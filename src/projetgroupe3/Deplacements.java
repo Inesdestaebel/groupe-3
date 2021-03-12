@@ -105,6 +105,11 @@ public class Deplacements{
 			pos2= pos;
 			
 		}
+		else if (dep.equals("B")) {
+			H.useBomb(P);
+			pos2= pos;
+			
+		}
 		else {
 			pos2= pos;
 			System.out.println("Ceci n'est pas une action valide.");

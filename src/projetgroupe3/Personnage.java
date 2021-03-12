@@ -144,7 +144,7 @@ public class Personnage {
 	@Override
 	public String toString() {
 		if (alive){
-			return "[name=" + name + ", pV=" + pV + ", inventaire=" + inventaire + " Position :"+position +"]";
+			return "[name=" + name + ", pV=" + pV + ", inventaire=" + inventaire + "]";
 
 		}
 		else {
