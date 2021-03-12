@@ -126,6 +126,7 @@ public class Deplacements{
 	}
 	
 	
+	//Permet a un personnage de faire une action sur le plateaudejeu
 	public void Dep(Personnage H, Plateaudejeu P, String dep) {
 		
 		int[] pos = H.getPosition();
@@ -198,6 +199,11 @@ public class Deplacements{
 			pos2= pos;
 			
 		}
+		else if (dep.equals("B")) {
+			H.useBomb(P);
+			pos2= pos;
+			
+		}
 		else {
 			pos2= pos;
 			System.out.println("Ceci n'est pas une action valide.");
@@ -242,6 +248,7 @@ public class Deplacements{
 		
 
 
+	//permet de decouper une chaine de charactere pour appliquer la fonction dep à des chaines de 1 charactere
 	public void Move(String S, Personnage H, Plateaudejeu P) {
 		int i=0;
 		while((i<S.length())&&(!getVictoire())&&(H.isAlive())) {
@@ -253,12 +260,15 @@ public class Deplacements{
 		}
 		}
 	
+	
 	public boolean getVictoire() {
 		return victoire;
 	}
 	public void cestGagne() {
 		victoire=true;
 	}
+	
+	//renvoi true si la position (en parametre) se trouve sur le plateau (en parametre egalement), false sinon
 	public boolean pos2existe(int[] pos2, Plateaudejeu p) {
 		if ((pos2[0]<0)||(pos2[1]<0)||(pos2[0]>=p.getX())||(pos2[0]>=p.getY())){
 			return false;
