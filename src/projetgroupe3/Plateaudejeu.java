@@ -145,26 +145,6 @@ public class Plateaudejeu {
 			
 		}
 		
-		
-		//public int getNbjoueur() {
-		//	return nbjoueur;
-		//}
-
-
-		//public void setNbjoueur(int nbjoueur) {
-			//if (nbjoueur>0) {
-			//	this.nbjoueur = nbjoueur;
-
-		//	}
-			//else {
-				//System.err.println(nbjoueur+ " <0 impossible de creer un plateau nbJoueurNegatif ");
-
-		//	}
-		//}
-		
-
-
-
 		public int getX() {
 			return X;
 		}
@@ -192,26 +172,6 @@ public class Plateaudejeu {
 			}
 				
 		}
-		
-		
-
-	//	public Personnage[] getListPesronnage() {
-	//		return listPesronnage;
-	//	}
-
-		
-		//public  void setListPersonnage() {
-		//	this.listPesronnage = new Personnage[nbjoueur];
-		//	Scanner sc=new Scanner(System.in);
-		//	for (int i=0; i<listPesronnage.length; i++) {
-		//		System.out.println("Joueur "+(i+1)+" donnez votre nom:");
-		//		String name=sc.next();
-		//		listPesronnage[i]=addPlayer(name);	
-		//	}
-		//	sc.close();
-		
-			
-	//	}
 
 
 		public void afficher() {
@@ -222,17 +182,16 @@ public class Plateaudejeu {
 				}
 			System.out.println();
 			}
-		//	for (int i=0; i<getListPesronnage().length; i++) {
-		//		System.out.println(getListPesronnage()[i]);
-
 			}
 
-		//}
 
 		public char valeurcase (int x, int y) {
 			return plateau[x][y];
 		}
 		
+		public char valeurcaseperso(int x, int y) {
+			return plateauPerso[x][y];
+		}
 		
 		//PLacer un nouveau joueur sur une case vide
 		public Personnage addPlayer(String name) {
@@ -253,4 +212,5 @@ public class Plateaudejeu {
 		
 		//public void reveal(int[2] coord)
 }
+
 

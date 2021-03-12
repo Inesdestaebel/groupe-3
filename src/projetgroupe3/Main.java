@@ -13,7 +13,7 @@ public class Main {
 		int potion = 15;
 		Plateaudejeu plateau = new Plateaudejeu(X,Y,murs,pieges,potion);
 		
-		//Pour afficher le plateau mais à supprimer dans le jeu car le joueur ne doit pas le voir au début.
+		//Pour afficher le plateau, mais le joueur ne doit pas le voir.
 		//plateau.afficher();
 		
 		//Ajout du joueur.
@@ -23,6 +23,8 @@ public class Main {
 		//plateau.addPlayer(name);
 		Personnage H = plateau.addPlayer(name);
 		plateau.afficherPlateauPerso();
+		
+		//Règles du jeu
 		System.out.println(H);
 		System.out.println("Z vous permet de monter.");
 		System.out.println("S vous permet de descendre.");
@@ -30,17 +32,11 @@ public class Main {
 		System.out.println("Q vous permet d'aller à gauche.");
 		System.out.println("R vous permet de ramasser un objet.");
 		System.out.println("E vous permet d'utiliser une potion.");
+		System.out.println("B vous permet d'utiliser une bombe.");
 		//plateau.afficher();
 		
-		//Plateau que le joueur verra, on changera les valeurs en introduisant les valeurs 
-		//DOIS JE METTRE CA DANS UNE AUTRE CLASSE?
-		
-		
-		
-		
 			
-			//Déplacements du joueur
-
+		//Déplacements du joueur
 		Deplacements D = new Deplacements(H,plateau);
 			while(!D.getVictoire() && H.isAlive()) {
 				System.out.println("Veuillez entrer vos 4 actions :");
@@ -49,22 +45,24 @@ public class Main {
 					System.out.println("Entrez 4 actions...");
 					move = s.next();
 				}
-				//Utilisation des fonctions de déplacement
+				
+		//Utilisation des fonctions de déplacement
 				
 				D.Move(move, H, plateau);
 				plateau.afficherPlateauPerso();
 				System.out.println(H);
-				//plateau.afficher();
+				plateau.afficher();
 			}
+			
+		//Affichage lors de la victoire
 			
 			if (H.isAlive()) {
 				System.out.println("Victoire!");
 				plateau.afficher();
 			}
+			s.close();
 			}
 		}
 
 	
-
-
 
