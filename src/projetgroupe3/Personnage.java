@@ -100,8 +100,7 @@ public class Personnage {
 		if (getInventaire().get(i)==Item.Bombe) {
 			if (getPosition()[0]+1<p.getX()) {
 				if (p.valeurcase(getPosition()[0]+1, getPosition()[1])=='#') {
-					int[] down=getPosition();
-					down[0]+=1;
+					int[] down={getPosition()[0]+1,getPosition()[1]};
 					p.setOnePlateau(' ',down);
 					p.setOnePlateauPerso(' ',down);;
 				}
@@ -109,8 +108,7 @@ public class Personnage {
 			
 			if (getPosition()[0]-1>=0) {
 				if (p.valeurcase(getPosition()[0]-1, getPosition()[1])=='#') {
-					int[] up =getPosition();
-					up[0]-=1;
+					int[] up ={getPosition()[0]-1,getPosition()[1]};
 					p.setOnePlateau(' ',up);
 					p.setOnePlateauPerso(' ',up);;
 				}
@@ -118,8 +116,7 @@ public class Personnage {
 			
 			if (getPosition()[1]+1<p.getY()) {
 				if (p.valeurcase(getPosition()[0], getPosition()[1]+1)=='#') {
-					int[] right =getPosition();
-					right[1]+=1;
+					int[] right ={getPosition()[0],getPosition()[1]+1};
 					p.setOnePlateau(' ',right);
 					p.setOnePlateauPerso(' ',right);;
 				}
@@ -127,13 +124,13 @@ public class Personnage {
 			
 			if (getPosition()[1]-1>=0) {
 				if (p.valeurcase(getPosition()[0], getPosition()[1]-1)=='#') {
-					int[] left =getPosition();
-					left[1]-=1;
+					int[] left = {getPosition()[0],getPosition()[1]-1};
+
 					p.setOnePlateau(' ',left);
 					p.setOnePlateauPerso(' ',left);;
 				}
 			}
-			
+			inventaire.remove(i);
 		}
 		else {
 			System.out.println("Vous n'avez pas de bombe dans votre inventaire...");
@@ -147,7 +144,7 @@ public class Personnage {
 	@Override
 	public String toString() {
 		if (alive){
-			return "[name=" + name + ", pV=" + pV + ", inventaire=" + inventaire + "]";
+			return "[name=" + name + ", pV=" + pV + ", inventaire=" + inventaire + " Position :"+position +"]";
 
 		}
 		else {
