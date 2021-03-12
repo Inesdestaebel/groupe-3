@@ -50,7 +50,7 @@ public class Main {
 				D.Move(move, H, plateau);
 				plateau.afficherPlateauPerso();
 				System.out.println(H);
-				plateau.afficher();
+				//plateau.afficher();
 			}
 			
 		//Affichage lors de la victoire
