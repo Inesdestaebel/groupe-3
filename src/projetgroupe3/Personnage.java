@@ -76,7 +76,7 @@ public class Personnage {
 		int dmg=2;
 		setPV(this.getPV()-dmg);
 	}
-	// permet au Personnage de se soigner s’il possède une potion dans son inventair
+	// permet au Personnage de se soigner s’il possède une potion dans son inventaire
 	public void usePotion() {
 		
 		int heal=3;
