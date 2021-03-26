@@ -185,11 +185,18 @@ public class Plateaudejeu {
 
 
 		public char valeurcase (int x, int y) {
-			return plateau[x][y];
+			if ((x<0) || (x>this.getX()-1) || (y<0) ||(y>this.getY()-1)) {
+				return plateau[x][y];
+			}
+			else return ' ';
+			
 		}
 		
 		public char valeurcaseperso(int x, int y) {
-			return plateauPerso[x][y];
+			if ((x<0) || (x>this.getX()-1) || (y<0) ||(y>this.getY()-1)) {
+				return plateauPerso[x][y];
+			}
+			else return ' ';
 		}
 		
 		//PLacer un nouveau joueur sur une case vide

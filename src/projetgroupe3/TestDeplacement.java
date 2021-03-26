@@ -47,11 +47,8 @@ public class TestDeplacement {
 		System.out.println("Test invalid command 'm'");
 		s="m";
 		dpl.Dep (H, plateau,s);
-
-		System.out.println("Test invalid command 'm'");
-		s="m";
+		System.out.println("Test utiliser bombe");
+		s="B";
 		dpl.Dep (H, plateau,s);
-		
-
 	}
 }
