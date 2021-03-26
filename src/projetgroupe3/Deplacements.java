@@ -9,7 +9,7 @@ public class Deplacements{
 	// on fait varier X les lignes et Y les colonnes pour se déplacer
 	
 
-	public Deplacements(Personnage H, Plateaudejeu P) {
+	public Deplacements() {
 
 	}
 	
