@@ -209,6 +209,23 @@ public class Plateaudejeu {
 			return player;
 		}
 		
+		public Personnage addPlayerServeur(String name, int nbr) {
+			
+			Random r = new Random();
+			int x=r.nextInt(X);
+			int y=r.nextInt(Y);
+			while (plateau[x][y]!=' ') {
+				 x=r.nextInt(X);
+				 y=r.nextInt(Y);	
+			}
+			int[]pos= {x,y};
+			Personnage player=new Personnage(name,pos);
+			String t = String.valueOf(nbr);
+			plateau[x][y]=t.charAt(0); 
+			plateauPerso[x][y]=t.charAt(0);
+			return player;
+		}
+		
 		//public void reveal(int[2] coord)
 }
 

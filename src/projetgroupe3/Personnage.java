@@ -32,7 +32,10 @@ public class Personnage {
 	}
 	
 	public void setName(String name) {
-		this.name = name;
+		if (name.length()<=10 && name.length()>0)
+			this.name = name;
+		else
+			System.out.println("Votre nom doit faire au moins 1 caractère et au maximum 10!");
 	}
 
 
@@ -42,7 +45,10 @@ public class Personnage {
 	}
 	
 	public void setPV(int pv) {
+		if(pv>=0)
 		pV = pv;
+		else 
+			System.out.println("Ce nombre est inférieur à zéro.");
 	}
 
 
@@ -65,12 +71,12 @@ public class Personnage {
 		alive=false;	
 	}
 	
-	// permet au Personnage de se soigner s’il possède une potion dans son inventaire
+	//-2PV lorsqu'il y a un piège
 	public void trap() {
 		int dmg=2;
 		setPV(this.getPV()-dmg);
 	}
-	
+	// permet au Personnage de se soigner s’il possède une potion dans son inventaire
 	public void usePotion() {
 		
 		int heal=3;
