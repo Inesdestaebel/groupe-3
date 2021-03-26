@@ -51,8 +51,6 @@ public class TestDeplacement {
 		System.out.println("Test invalid command 'm'");
 		s="m";
 		dpl.Dep (H, plateau,s);
-
-
 		
 
 	}
