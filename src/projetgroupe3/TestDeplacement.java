@@ -48,6 +48,10 @@ public class TestDeplacement {
 		s="m";
 		dpl.Dep (H, plateau,s);
 
+		System.out.println("Test invalid command 'm'");
+		s="m";
+		dpl.Dep (H, plateau,s);
+
 
 		
 

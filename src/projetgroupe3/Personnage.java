@@ -82,7 +82,7 @@ public class Personnage {
 		int heal=3;
 		if (!getInventaire().isEmpty()) {
 			int i=0;
-			while ((i<getInventaire().size()) & (getInventaire().get(i)!=Item.Potion)) {
+			while ((i<getInventaire().size()-1) & (getInventaire().get(i)!=Item.Potion)) {
 				i++;
 			}
 			if (getInventaire().get(i)==Item.Potion) {
@@ -109,7 +109,7 @@ public class Personnage {
 	public void useBomb(Plateaudejeu p) {		
 		if (!getInventaire().isEmpty()) {
 			int i=0;
-			while ((i<getInventaire().size()) & (getInventaire().get(i)!=Item.Bombe)) {
+			while ((i<getInventaire().size()-1) & (getInventaire().get(i)!=Item.Bombe)) {
 				i++;
 			}
 			if (getInventaire().get(i)==Item.Bombe) {

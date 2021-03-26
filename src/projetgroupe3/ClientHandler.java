@@ -30,7 +30,7 @@ public class ClientHandler implements Runnable {
 		out.println(name+", la partie peut commencer.");
 		out.println("Votre numéro de joueur est "+nbr);
 	
-;		Personnage H = plateau.addPlayerServeur(name,nbr);
+		Personnage H = plateau.addPlayerServeur(name,nbr);
 		for ( int x = 0 ; x<plateau.getX(); x++ ) {
 			for ( int y = 0 ; y<plateau.getY(); y++ ) {
 				out.print(plateau.valeurcaseperso(x, y));

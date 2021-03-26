@@ -107,6 +107,7 @@ public class Deplacements{
 			
 		}
 		else if (dep.equals("B")) {
+			System.out.println("BOOOOM!!!");
 			H.useBomb(P);
 			pos2= pos;
 			
