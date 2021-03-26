@@ -2,6 +2,7 @@ package projetgroupe3;
 
 import java.util.Random;
 
+
 public class Deplacements{
 	private boolean victoire=false;
 	private char caseActu;
@@ -9,7 +10,7 @@ public class Deplacements{
 	// on fait varier X les lignes et Y les colonnes pour se déplacer
 	
 
-	public Deplacements() {
+	public Deplacements(Personnage H, Plateaudejeu P) {
 
 	}
 	
