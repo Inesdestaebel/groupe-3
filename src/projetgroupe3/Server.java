@@ -26,7 +26,7 @@ public class Server {
 		System.out.println("Serveur connecté au client.");
 		nbr+=1;
 		ClientHandler clientThread = new ClientHandler(s,nbr,plateau);
-		clients.add(clientThread);
+ 		clients.add(clientThread);
 		pool.execute(clientThread);
 		}
 		

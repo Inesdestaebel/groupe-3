@@ -1,6 +1,7 @@
 package projetgroupe3;
 
 import java.net.*;
+import java.util.ArrayList;
 import java.io.*;
 
 public class ClientHandler implements Runnable {
@@ -11,13 +12,12 @@ public class ClientHandler implements Runnable {
 	private Plateaudejeu plateau;
 	private boolean i = true;
 	
-	public ClientHandler(Socket clientSocket, int nbr, Plateaudejeu plateau ) throws IOException{
+	public ClientHandler(Socket clientSocket, int nbr, Plateaudejeu plateau) throws IOException{
 		this.client = clientSocket;
 		this.nbr=nbr;
 		this.plateau=plateau;
 		in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 		out = new PrintWriter(client.getOutputStream(),i); 
-
 }
 
 	//@Override
@@ -26,15 +26,10 @@ public class ClientHandler implements Runnable {
 			while(i) {
 		out.println("Vous êtes bien connecté.");
 		out.println("Veuillez entrer un pseudo.");
-		String name = in.readLine();
+		String name = in.readLine(); 
 		out.println(name+", la partie peut commencer.");
 		out.println("Votre numéro de joueur est "+nbr);
 	
-		
-		//MAIN
-		
-		
-		//out.println(X*Y);
 ;		Personnage H = plateau.addPlayerServeur(name,nbr);
 		for ( int x = 0 ; x<plateau.getX(); x++ ) {
 			for ( int y = 0 ; y<plateau.getY(); y++ ) {
@@ -57,10 +52,6 @@ public class ClientHandler implements Runnable {
 		}
 	}
 		
-	//	public void outToAll(String msg) {
-	//		for (ClientHandler aClient : clients) {
-	//	}
-	//}
 
 
 }
