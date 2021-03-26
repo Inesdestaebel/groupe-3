@@ -186,18 +186,18 @@ public class Plateaudejeu {
 
 		public char valeurcase (int x, int y) {
 			if ((x<0) || (x>this.getX()-1) || (y<0) ||(y>this.getY()-1)) {
-				else return ' ';
+				return ' ';
 			}
 			
-			return plateau[x][y];
+			else return plateau[x][y];
 		}
 		
 		public char valeurcaseperso(int x, int y) {
 			if ((x<0) || (x>this.getX()-1) || (y<0) ||(y>this.getY()-1)) {
-				else return ' ';
+				return ' ';
 			}
 			
-			return plateauPerso[x][y];
+			else return plateauPerso[x][y];
 		}
 		
 		//PLacer un nouveau joueur sur une case vide
