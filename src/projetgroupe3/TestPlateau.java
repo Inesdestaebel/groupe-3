@@ -5,9 +5,10 @@ public class TestPlateau {
 	public static void main(String[] args) {
 		//Test pour les murs
 		Plateaudejeu p= new Plateaudejeu(5,5,0,0,0);
-		int[]pos={2,3};                 
-		Personnage H = new Personnage("Test",pos);                 
-		p[2][3]="#";                                                   
+		int[]pos={2,0};                 
+		Personnage H = new Personnage("Test",pos);
+		int[]mur= {2,2};
+		p.setOnePlateau('#', mur);                                                  
 		
 		//Déplacements du joueur                         
 		Deplacements D = new Deplacements(H,p);                                 
@@ -18,22 +19,20 @@ public class TestPlateau {
 		//Utilisation des fonctions de déplacement                                                                  
 		D.Move(move, H, p);                                 
 		p.afficher();                                 
-		System.out.println(H);                                 
-		}                              
+		System.out.println(H);                                                               
 	
 		//Test pour les pièges                 
-		Plateaudejeu p= new Plateaudejeu(5,5,0,0,0);                 
-		int[]pos={2,3};                 
+		Plateaudejeu p2= new Plateaudejeu(5,5,0,0,0);                                  
 		Personnage T = new Personnage("Test",pos);                 
-		p[2][3]="~";       
+		p2.setOnePlateau('~', mur);       
 		
-		Deplacements D = new Deplacements(T,p);                             
+		Deplacements D2 = new Deplacements(T,p2);                             
 		System.out.println("Veuillez entrer vos 4 actions :");                             
-		p.afficher();                             
-		String move = "DDDD";
+		p2.afficher();                             
+		String move2 = "DDDD";
 		
-		D.Move(move, T, p);                             
-		p.afficher();                             
+		D2.Move(move2, T, p2);                             
+		p2.afficher();                             
 		System.out.println(H);                             
 		} 
 
