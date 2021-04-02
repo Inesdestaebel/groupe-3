@@ -9,21 +9,46 @@ import java.util.concurrent.Executors;
 
 import java.io.*;
 
-public class Server extends Thread{
+public class Server{
 	public static final int PORT=5112;
-	ServerSocket serverSocket = null;
 	private static ArrayList<Partie> n = new ArrayList<>();
 	private static ExecutorService pool = Executors.newCachedThreadPool();
 	
 
 	 public Server() {
-        
+		 ServerSocket serverSocket = null;
+		 	try {
+		 		serverSocket = new ServerSocket(PORT);
+		 	}catch (IOException e) {
+		 		e.printStackTrace();
+		 	}
+		 	
+		 	Partie partie = new Partie(9,15,44,15,15,2);
+		 	while(true) {
+		 		Socket s;
+		 		try {
+		 			while(partie.ready()==false) {
+		 			System.out.println("En attente de connexion...");
+		 			s = serverSocket.accept();
+		 			Client player = new Client(s);
+		 			System.out.println("Connexion réussie.");
+		 			player.start();
+		 			partie.addPlayer(player);
+		 			}
+		 			partie.start();
+		 		}catch (IOException e) {
+		 			e.printStackTrace();
+		 		}
+		 	}
 	 }
 	 
 	 
 	 public static void main(String argv[]) throws UnknownHostException, IOException {
-		ServerSocket ss = new ServerSocket(PORT);
-        Partie partie = new Partie(9,15,44,15,15,2);
+		new Server();
+	 }
+}
+	//	ServerSocket ss = new ServerSocket(PORT);
+      /*  Partie partie = new Partie(9,15,44,15,15,2);
         //Comment lancer plusieurs parties et choisir le nbre de joueurs?
 		 	while (true && partie.ready()==false) {
             try {
@@ -69,7 +94,7 @@ public class Server extends Thread{
              pool.execute(partie);
 	 
 }
-}
+} */
 
 		
 

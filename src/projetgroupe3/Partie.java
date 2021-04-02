@@ -2,7 +2,7 @@ package projetgroupe3;
 
 import java.util.ArrayList;
 
-public class Partie implements Runnable{
+public class Partie extends Thread{
 	private int X;
 	private int Y;
 	private int murs;
@@ -35,11 +35,11 @@ public class Partie implements Runnable{
 	}
 	
 	public void run() {
-		for(Client player : joueurs) {
-			player.send_message("Bienvenue dans la partie.");
+		//for(Client player : joueurs) {
+			//player.send_message("Bienvenue dans la partie.");
 			//Je n'arrive pas à faire la fonction send_message qui permettrait
 			//D'envoyer les informations aux joueurs et pas au serveur.
-		}
+		//}
 		System.out.println("En attente des joueurs pour que la partie commence...");
 		for(Client player : joueurs) {
 			while(player.isReady()==false) { 
@@ -52,6 +52,13 @@ public class Partie implements Runnable{
 			
 			System.out.println(player.getName()+" est prêt.");
 			}
+		
+		for (int i=0;i<joueurs.size();i++) {
+			Client player = joueurs.get(i);
+			//renvoyer la vision du joueur : serializable
+		}
+		
+		
 			
 		}
 	}
