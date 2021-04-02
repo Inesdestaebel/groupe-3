@@ -50,7 +50,7 @@ public class Partie extends Thread{
 			}
 			}
 			
-			System.out.println(player.getName()+" est prêt.");
+			System.out.println(player.getNom()+" est prêt.");
 			}
 		
 		for (int i=0;i<joueurs.size();i++) {

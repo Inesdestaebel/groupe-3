@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.io.*;
 
 public class Client extends Thread{  
-	    private String name;
+	    private String name="";
 	    private PrintStream out;
 	    private BufferedReader in;
 	    private Boolean ready=false;
@@ -25,13 +25,13 @@ public class Client extends Thread{
 				
 	    }
 	   
-	    //public void setName(String n) {
-	    //	this.name = n;
-	   // }
+	   public void setNom(String n) {
+	    	this.name = n;
+	   }
 	    
-	   // public String getName() {
-	   // 	return name;
-	   // }
+	   public String getNom() {
+	   		return name;
+	   }
 	    
 	    public void Ready(boolean a) {
 	    	this.ready=a;
@@ -60,6 +60,21 @@ public class Client extends Thread{
 	   // }
 	    
 	   public void run() {
+		   try {
+		   name=in.readLine();
+		   String r= in.readLine();
+		   if(r.equals("A")) {
+			   Ready(true);
+		   }
+		   
+		   setNom(name);
+		   }catch(IOException e) {
+			   e.printStackTrace();
+		   }
+		   
+		   
+	   
+	   
 	    	 //Scanner sc = new Scanner(System.in);
 	    	 //Socket socket = new Socket("localhost", 5112);
 		    	//Client c = new Client(socket);
@@ -85,6 +100,7 @@ public class Client extends Thread{
 	    	Client c = new Client(socket);
 	    	System.out.println("Bonjour, veuillez entrer un nom!");
 	    	String n = sc.next();
+	    	c.setNom(n);
 		    c.out.println(n);
 		    c.out.flush();
 	    	System.out.println("Entrez un A si vous êtes prêts.");

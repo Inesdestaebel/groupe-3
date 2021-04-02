@@ -34,8 +34,10 @@ public class Server{
 		 			System.out.println("Connexion réussie.");
 		 			player.start();
 		 			partie.addPlayer(player);
+		 			if(partie.ready()) {
+		 				partie.start();
 		 			}
-		 			partie.start();
+		 			}
 		 		}catch (IOException e) {
 		 			e.printStackTrace();
 		 		}
