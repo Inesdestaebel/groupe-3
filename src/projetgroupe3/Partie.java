@@ -58,15 +58,35 @@ public class Partie extends Thread{
 		
 		for (int i=0;i<joueurs.size();i++) {
 			Client player = joueurs.get(i);
-			Personnage H = Plateau.addPlayerServeur(player.getNom());
+			player.p = Plateau.addPlayerServeur(player.getNom());
+			player.D = new Deplacements(player.p,Plateau);
 			
 			//renvoyer la vision du joueur : serializable
 		}
 		Plateau.afficher(); //Je l'affiche seulement pour tester
 		
+		boolean fin=false;
+		while(fin==false) {
+			System.out.println("En attente des actions des joueurs...");
+			for (int i=0;i<joueurs.size();i++) {
+				Client player = joueurs.get(i);
+				while(player.ReadyActions()==false && player.p.isAlive()) {
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				System.out.println(player.getNom()+" est prêt.");
+				if(player.D.getVictoire()) {
+					fin=true;
+					System.out.println(player.getNom()+" a gagné!!!");
+				}
+		}
 			
 		}
 	}
+}
 
 
 	

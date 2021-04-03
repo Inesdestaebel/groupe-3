@@ -17,6 +17,10 @@ public class Personnage {
 		setPosition(position);
 		inventaire.add(Item.Bombe);
 	}
+	
+	public Personnage(String name){
+		setName(name); 
+	}
 
 	public int[] getPosition() {
 		return position;

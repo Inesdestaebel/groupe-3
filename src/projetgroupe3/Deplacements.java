@@ -14,6 +14,10 @@ public class Deplacements{
 
 	}
 	
+	public Deplacements(Personnage H) {
+		
+	}
+	
 	//Fonction qui permet de retourner la case sur laquelle on se trouve.
 	public char getCaseActu(){
 		return caseActu;
