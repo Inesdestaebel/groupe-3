@@ -10,6 +10,7 @@ public class Client extends Thread{
 	    private BufferedReader in;
 	    private Boolean ready=false;
 	    private Socket s;
+	    private Personnage p;
 	    
 	    public Client(Socket s) {
 	    	try {
@@ -20,9 +21,22 @@ public class Client extends Thread{
 	    	e.printStackTrace();
 	    }
 	    }
+	   
+	    	
 	    
-	    public void send_message(String i) {
-				
+	    
+	    public void send_message() {
+	    	while(true) {
+	            String reponse;
+	            try {
+	                reponse = in.readLine();
+	                System.out.println("Reponse serveur : "+reponse);
+
+	            } catch (IOException e) {
+	                System.out.println("La connexion est perdue !");
+	                System.exit(1);
+	            }
+	        }
 	    }
 	   
 	   public void setNom(String n) {
@@ -41,23 +55,6 @@ public class Client extends Thread{
 	    	return ready;
 	    }
 	    
-	   // public void loop() {
-	    //    Scanner sc = new Scanner(System.in);
-
-	      //  while(true) {
-	      //      String line = sc.next();
-	      //      out.println(line);
-	      //      String reponse;
-	      //      try {
-	      //         reponse = in.readLine();
-	       //         System.out.println("Reponse serveur : "+reponse);
-//
-	        //    } catch (IOException e) {
-	         //       System.out.println("La connexion est perdue !");
-	         //       System.exit(1);
-	         //   }
-	       // }
-	   // }
 	    
 	   public void run() {
 		   try {
@@ -71,27 +68,7 @@ public class Client extends Thread{
 		   }catch(IOException e) {
 			   e.printStackTrace();
 		   }
-		   
-		   
-	   
-	   
-	    	 //Scanner sc = new Scanner(System.in);
-	    	 //Socket socket = new Socket("localhost", 5112);
-		    	//Client c = new Client(socket);
-		        //System.out.println("Bonjour, veuillez entrer un nom!");
-		       // String n = sc.next();
-		       // out.println(n);
-		       // out.flush();
-		        
-		        //System.out.println("Entrez un A si vous êtes prêts.");
-		        /*String r = sc.next();
-		        while(r.equals("A")==false) {
-		        	System.out.println("Un A...");
-		        	r = sc.next();
-		        }
-		        out.println(r);
-		        out.flush();*/
-		    }
+	}
 	
 
 	    public static void main(String argv[]) throws IOException {
@@ -100,7 +77,6 @@ public class Client extends Thread{
 	    	Client c = new Client(socket);
 	    	System.out.println("Bonjour, veuillez entrer un nom!");
 	    	String n = sc.next();
-	    	c.setNom(n);
 		    c.out.println(n);
 		    c.out.flush();
 	    	System.out.println("Entrez un A si vous êtes prêts.");
@@ -109,34 +85,9 @@ public class Client extends Thread{
 	        	System.out.println("Un A...");
 	        	r = sc.next();
 	        }
-	        c.Ready(true);
 	        c.out.println(r);
 	        c.out.flush();
 	    }
+
 }
-           // PrintStream out= new PrintStream( socket.getOutputStream() );
-           // BufferedReader in= new BufferedReader(new InputStreamReader(socket.getInputStream()));
-	    	
-	       // Scanner sc = new Scanner(System.in);
-	        
-	       // System.out.println("Bonjour, veuillez entrer un nom!");
-	       // String n = sc.next();
-	       // out.println(n);
-	        //out.flush();
-	        
-	       // System.out.println("Entrez un A si vous êtes prêts.");
-	       // String r = sc.next();
-	      //  while(r.equals("A")==false) {
-	        //	System.out.println("Un A...");
-	        //	r = sc.next();
-	     //   }
-	       // out.println(r);
-	      //  out.flush();
-	   // }
-	        
-	        
-	        //si.close();
-		   
-		 // c.loop();
-	    
-	    
+           

@@ -217,7 +217,7 @@ public class Plateaudejeu {
 			return player;
 		}
 		
-		public Personnage addPlayerServeur(String name, int nbr) {
+		public Personnage addPlayerServeur(String name) {
 			
 			Random r = new Random();
 			int x=r.nextInt(X);
@@ -228,9 +228,8 @@ public class Plateaudejeu {
 			}
 			int[]pos= {x,y};
 			Personnage player=new Personnage(name,pos);
-			String t = String.valueOf(nbr);
-			plateau[x][y]=t.charAt(0); 
-			plateauPerso[x][y]=t.charAt(0);
+			plateau[x][y]='H';
+			//plateauPerso[x][y]=t.charAt(0);
 			return player;
 		}
 		

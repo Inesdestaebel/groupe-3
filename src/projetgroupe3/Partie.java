@@ -22,6 +22,9 @@ public class Partie extends Thread{
 		Plateau = new Plateaudejeu(X,Y,murs,pieges,potions);
 	}
 	
+	public Plateaudejeu getPlateau() {
+		return Plateau;
+	}
 	public boolean ready() {
 		return joueurs.size()==this.nb_joueurs;
 	}
@@ -55,6 +58,8 @@ public class Partie extends Thread{
 		
 		for (int i=0;i<joueurs.size();i++) {
 			Client player = joueurs.get(i);
+			Personnage H = Plateau.addPlayerServeur(player.getNom());
+			//Plateau.afficher();
 			//renvoyer la vision du joueur : serializable
 		}
 		
