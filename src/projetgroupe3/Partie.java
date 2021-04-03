@@ -59,10 +59,10 @@ public class Partie extends Thread{
 		for (int i=0;i<joueurs.size();i++) {
 			Client player = joueurs.get(i);
 			Personnage H = Plateau.addPlayerServeur(player.getNom());
-			//Plateau.afficher();
+			
 			//renvoyer la vision du joueur : serializable
 		}
-		
+		Plateau.afficher(); //Je l'affiche seulement pour tester
 		
 			
 		}
