@@ -78,6 +78,7 @@ public class Partie extends Thread{
 					}
 				}
 				System.out.println(player.getNom()+" est prêt.");
+				player.setActions("a"); //Pour que players.ReadyActions() passe à faux/
 				if(player.D.getVictoire()) {
 					fin=true;
 					System.out.println(player.getNom()+" a gagné!!!");

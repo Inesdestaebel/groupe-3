@@ -77,10 +77,11 @@ public class Client extends Thread{
 			   Ready(true);
 		   }
 		   while(fin==false) {
+			   //setActions("a");
 			   actions=in.readLine();
 			   setActions(actions);
-			   if(D.getVictoire()==false)
-				   setActions("a");
+			   //if(D.getVictoire()==false)
+				  // setActions("a");
 		   }
 		   }catch(IOException e) {
 			   e.printStackTrace();
@@ -107,6 +108,8 @@ public class Client extends Thread{
 	        c.out.flush();
 	        
 	        while(c.fin==false) {
+	        	//Si J'avais un send message, ca ne se générerais que lorsque tous les joueurs etaient
+	        	//Prets....
 	        	System.out.println("Z vous permet de monter.");
 				System.out.println("S vous permet de descendre.");
 				System.out.println("D vous permet d'aller à droite.");
