@@ -14,6 +14,7 @@ public class Client extends Thread{
 	    Personnage p = new Personnage (name);
 	    Deplacements D = new Deplacements(p);
 	    Deplacements Djoueurs = new Deplacements(p);
+	    private char[][] plateau;
 	    String actions="";
 	    
 	    public Client(Socket s) {
@@ -34,19 +35,14 @@ public class Client extends Thread{
 	  public void setSocket(Socket s) {
 		  this.s=s;
 	  }
+	  
+	  public Socket getSocket() {
+		  return s;
+	  }
 	   
-	  public void send_message() {
-	    	while(true) {
-	            String reponse;
-	            try {
-	                reponse = in.readLine();
-	                System.out.println("Reponse serveur : "+reponse);
-
-	            } catch (IOException e) {
-	                System.out.println("La connexion est perdue !");
-	                System.exit(1);
-	            }
-	        }
+	  public void send_message(String i) {
+	    	out.println(i);
+	    	out.flush();
 	    }
 	   
 	   public void setNom(String n) {
@@ -56,6 +52,25 @@ public class Client extends Thread{
 	   public String getNom() {
 	   		return name;
 	   }
+	   
+	   public char[][] getPlateau(){
+		   return plateau;
+	   }
+	   
+	   public void setPlateau(int X, int Y) {
+		   this.plateau= new char[X][Y];
+		   for(int i=0; i<X;i++) {
+			   for(int j=0;j<Y;j++) {
+				   plateau[i][j]='?';
+			   }
+		   }
+	   }
+	   
+	   public void setOnePlateau(char c, int[]pos) {
+			plateau[pos[0]][pos[1]]=c;
+		}
+	   
+	   
 	    
 	    public void Ready(boolean a) {
 	    	this.ready=a;
@@ -78,6 +93,11 @@ public class Client extends Thread{
 	    	}
 	    }
 	    
+	    public String getActions() {
+	    	return actions;
+	    }
+	    
+	    
 	   public void run() {
 		   try {
 		   name=in.readLine();
@@ -87,13 +107,14 @@ public class Client extends Thread{
 			   Ready(true);
 			   
 		   }
-		  
+		   
+ 
 		   while(fin==false) {
-			   //setActions("a");
-			   actions=in.readLine();
-			   setActions(actions);
-			  
+			   String action =in.readLine();
+			   setActions(action);
 		   }
+		   
+		   
 		   }catch(IOException e) {
 			   e.printStackTrace();
 			   
@@ -119,19 +140,28 @@ public class Client extends Thread{
 	        c.out.println(r);
 	        c.out.flush();
 	        
-	        VisionJoueur v = new VisionJoueur(c.p);
-			v.showVision(); //CE N'EST PAS LE MEME PLATEAU...
-			
-	        while(c.fin==false) {
-	        	//Si J'avais un send message, ca ne se générerait que lorsque tous les joueurs seraient
-	        	//Prets....
-	        	System.out.println("Z vous permet de monter.");
-				System.out.println("S vous permet de descendre.");
-				System.out.println("D vous permet d'aller à droite.");
-				System.out.println("Q vous permet d'aller à gauche.");
-				System.out.println("R vous permet de ramasser un objet.");
-				System.out.println("E vous permet d'utiliser une potion.");
-				System.out.println("Veuillez entrer vos 4 actions :");
+	      String messageentree = c.in.readLine();
+	      System.out.println(messageentree);
+	      System.out.println("");
+	      
+	       while(c.fin==false) {
+	    	   int i = 0;
+			   while(i<10) {
+			   String plateau = c.in.readLine();
+			   System.out.println(plateau);
+			   i++;
+			   }
+			   
+			   String personnage = c.in.readLine();
+			   System.out.println(personnage);
+			   
+			   int j=0;
+			   while(j<8) {
+				   String demandeactions = c.in.readLine();
+				   System.out.println(demandeactions);
+				   j++;
+			   }
+	        	
 				String move = sc.next();
 				while (move.length()!=4) {
 					System.out.println("Entrez 4 actions...");
@@ -142,6 +172,7 @@ public class Client extends Thread{
 				
 				if(c.D.getVictoire()==true || c.p.isAlive()==false) {
 					c.fin=true;
+					System.out.println("FIN");
 				}
 	        }
 	    }

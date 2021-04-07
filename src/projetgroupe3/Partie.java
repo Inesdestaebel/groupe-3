@@ -39,11 +39,10 @@ public class Partie extends Thread{
 	}
 	
 	public void run() {
-		//for(Client player : joueurs) {
-			//player.send_message("Bienvenue dans la partie.");
-			//Je n'arrive pas à faire la fonction send_message qui permettrait
-			//D'envoyer les informations aux joueurs et pas au serveur.
-		//}
+		for(Client player : joueurs) {
+			player.send_message("Bienvenue dans la partie. Vous êtes "+nb_joueurs+" joueurs.");	
+		}
+		
 		System.out.println("En attente des joueurs pour que la partie commence...");
 		for(Client player : joueurs) {
 			while(player.isReady()==false) {  
@@ -58,9 +57,10 @@ public class Partie extends Thread{
 			player.p = new Personnage(player.getNom());
 			}
 		
-		//MISE EN PLACE DU PLATEAU PERSO DU JOUEUR
+		//MISE EN PLACE DU PLATEAU DU JOUEUR EXACTEMENT COMME LE PLATEAU PRINCIPAL, OKKK FONCTIONNE 
 		for (int i=0;i<joueurs.size();i++) {
 			Client player = joueurs.get(i);
+			player.setPlateau(X,Y);
 			for(int x=0;x<X;x++) {
 				for(int y=0;y<Y;y++) {
 					int[] pos= {x,y};
@@ -68,26 +68,40 @@ public class Partie extends Thread{
 					player.p.getPlateau().setOnePlateau(a,pos);
 				}
 			}
-			player.p.setPosition(Plateau.addPlayerServeur(player.p));
-			player.D = new Deplacements(player.p,Plateau); //va permettre d'actualiser le plateau
-			player.Djoueurs = new Deplacements(player.p,player.p.getPlateau()); //va permettre
-			//d'actualiser le plateau du joueur seulement dans vision joueur.
-			player.p.getPlateau().setOnePlateauPerso('H',player.p.getPosition());//On ajoute un H sur le plateau joueur
-			//A la même position que celui sur le plateau général
-			player.p.getPlateau().setOnePlateau('H', player.p.getPosition());
-			VisionJoueur v = new VisionJoueur(player.p);
-			v.showVision(); //fonctionne mais je voudrais l'afficher chez les clients...
-			//player.p.getPlateau().afficherPlateauPerso(); //SEULEMENT AU JOUEUR...
-			System.out.println();
-
-			
-			//renvoyer la vision du joueur : serializable
 		}
-		//Plateau.afficher(); //Je l'affiche seulement pour tester, c'est bon, 2H
+		for(int i=0;i<joueurs.size();i++) {
+			Client player=joueurs.get(i);
+			
+			//Ajout du joueur sur le plateau et on associe la position au joueur.
+			player.p.setPosition(Plateau.addPlayerServeur(player.p));
+			
+			//On met a jour le plateau du joueur en ajoutant le joueur à cette position.
+			player.p.getPlateau().setOnePlateau('H',player.p.getPosition());
+			player.p.getPlateau().setOnePlateauPerso('H',player.p.getPosition());
+			
+			//On ajoute les fonctions de déplacements pour les deux plateaux
+			player.D = new Deplacements(player.p,Plateau); 
+			player.Djoueurs = new Deplacements(player.p,player.p.getPlateau()); 
+			
+			player.p.getPlateau().afficher(); //OK JUSTE
+			System.out.println("");
+			
+		}
+		Plateau.afficher(); //OK JUSTE
 		
 		boolean fin=false;
 		while(fin==false) {
 			System.out.println("En attente des actions des joueurs...");
+			for (int i=0;i<joueurs.size();i++) {
+				Client player = joueurs.get(i);
+				VisionJoueur v = new VisionJoueur(player);
+				player.send_message(v.showplateau(player));
+				player.send_message(v.showperso(player));
+				player.send_message(v.demandeactions(player));
+				//ICI ON RENVOIE SON PLATEAU AU JOUEUR AVEC LE PERSO ET LES CONSIGNES
+
+			}
+			
 			for (int i=0;i<joueurs.size();i++) {
 				Client player = joueurs.get(i);
 				while(player.ReadyActions()==false && player.p.isAlive()) {
@@ -98,14 +112,17 @@ public class Partie extends Thread{
 					}
 				}
 				System.out.println(player.getNom()+" est prêt.");
+				//ICI ON ATTEND LA CHAINE DE 4 CARACTERES ACTIONS DU JOUEUR
 			}
 			for(int i=0;i<joueurs.size();i++) {
+				//C'EST ICI QU'IL COMMENCE A Y AVOIR DES PROBLEMES! IL FAUT VOIR LES FONCTIONS DE DEP
 				Client player = joueurs.get(i);
 				player.Djoueurs.Move(player.actions, player.p , player.p.getPlateau());//Je mets
-				//à jour le plateau personnel du joueur afin qu'il est un plateau perso correct
+				//à jour le plateau personnel du joueur afin qu'il ai un plateau perso correct
+				player.p.getPlateau().afficher();
 				player.D.Move(player.actions, player.p ,Plateau);//Je mets a jour le plateau
 				//de la partie lorsqu'un joueur joue.
-				player.p.getPlateau().afficherPlateauPerso();//A ne renvoyer qu'au joueur
+				Plateau.afficher();
 				player.setActions("a"); //Pour que players.ReadyActions() passe à faux
 				System.out.println("");
 				if(player.D.getVictoire()) {

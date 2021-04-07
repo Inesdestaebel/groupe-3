@@ -23,9 +23,6 @@ public class Personnage {
 		inventaire.add(Item.Bombe);
 	}
 	
-	public void setPlateau(Plateaudejeu plateau) {
-		this.plateau=plateau;
-	}
 
 	public Plateaudejeu getPlateau() {
 		return plateau;

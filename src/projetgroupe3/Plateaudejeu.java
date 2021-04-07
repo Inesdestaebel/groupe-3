@@ -15,7 +15,7 @@ public class Plateaudejeu {
 		private int[] obj= new int[2];
 		//private Personnage[] listPesronnage;
 		
-		
+	
 		
 		//Constructeur
 		public Plateaudejeu(int X, int Y, int murs, int pieges, int potions) {
@@ -87,6 +87,9 @@ public class Plateaudejeu {
 			}
 		}
 
+		public char [][] getPlateau(){
+			return plateau;
+		}
 		
 		public void setOnePlateau(char c, int[]pos) {
 			plateau[pos[0]][pos[1]]=c;
