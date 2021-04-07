@@ -13,17 +13,27 @@ public class Client extends Thread{
 	    private Socket s;
 	    Personnage p = new Personnage (name);
 	    Deplacements D = new Deplacements(p);
+	    Deplacements Djoueurs = new Deplacements(p);
 	    String actions="";
 	    
 	    public Client(Socket s) {
 	    	try {
-	    		this.s=s;
+	    		setSocket(s);
 	    		out = new PrintStream( s.getOutputStream() );
 	    		in = new BufferedReader( new InputStreamReader( s.getInputStream() ) );
+	    		//while(true) {
+		    		//String rep = in.readLine();
+		    		//System.out.println(rep);
+	    	//	}
 	    	}catch(IOException e) {
 	    		e.printStackTrace();
 	    }
+	    	
 	    }
+	    
+	  public void setSocket(Socket s) {
+		  this.s=s;
+	  }
 	   
 	  public void send_message() {
 	    	while(true) {
@@ -75,13 +85,14 @@ public class Client extends Thread{
 		   String r= in.readLine();
 		   if(r.equals("A")) {
 			   Ready(true);
+			   
 		   }
+		  
 		   while(fin==false) {
 			   //setActions("a");
 			   actions=in.readLine();
 			   setActions(actions);
-			   //if(D.getVictoire()==false)
-				  // setActions("a");
+			  
 		   }
 		   }catch(IOException e) {
 			   e.printStackTrace();
@@ -96,6 +107,7 @@ public class Client extends Thread{
 	    	Client c = new Client(socket);
 	    	System.out.println("Bonjour, veuillez entrer un nom!");
 	    	String n = sc.next();
+	    	c.p.setName(n);
 		    c.out.println(n);
 		    c.out.flush();
 	    	System.out.println("Entrez un A si vous êtes prêts.");
@@ -107,8 +119,11 @@ public class Client extends Thread{
 	        c.out.println(r);
 	        c.out.flush();
 	        
+	        VisionJoueur v = new VisionJoueur(c.p);
+			v.showVision(); //CE N'EST PAS LE MEME PLATEAU...
+			
 	        while(c.fin==false) {
-	        	//Si J'avais un send message, ca ne se générerais que lorsque tous les joueurs etaient
+	        	//Si J'avais un send message, ca ne se générerait que lorsque tous les joueurs seraient
 	        	//Prets....
 	        	System.out.println("Z vous permet de monter.");
 				System.out.println("S vous permet de descendre.");
@@ -128,7 +143,6 @@ public class Client extends Thread{
 				if(c.D.getVictoire()==true || c.p.isAlive()==false) {
 					c.fin=true;
 				}
-			
 	        }
 	    }
 }

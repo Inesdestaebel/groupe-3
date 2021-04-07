@@ -4,10 +4,17 @@ import java.io.Serializable;
 
 public class VisionJoueur implements Serializable{
 	private Personnage p;
-	//public Plateaudejeu map;
+	private Plateaudejeu map;
 	private Partie partie;
+	private Deplacements dep;
 
-	//public VisionJoueur(Partie partie) {
-		//Personnage p = partie.getPlateau(). 
-	//}
+	public VisionJoueur(Personnage p) {
+		this.p=p;
+	}
+
+	public void showVision() {
+		p.getPlateau().afficherPlateauPerso();
+		System.out.println(p);
+	}
+	
 }

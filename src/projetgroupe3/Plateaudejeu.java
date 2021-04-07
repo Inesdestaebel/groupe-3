@@ -1,5 +1,6 @@
 package projetgroupe3;
 
+import java.io.PrintStream;
 import java.util.Random;
 
 public class Plateaudejeu {
@@ -13,23 +14,27 @@ public class Plateaudejeu {
 		private char[][] plateauPerso;
 		private int[] obj= new int[2];
 		//private Personnage[] listPesronnage;
-
+		
+		
 		
 		//Constructeur
-		public Plateaudejeu(int X, int Y, int murs, int pieges, int potion) {
+		public Plateaudejeu(int X, int Y, int murs, int pieges, int potions) {
 			setX(X);
 			setY(Y);
 			//setNbjoueur(nbjoueur);
-			setMursPiegesPotion(murs, pieges, potion);
+			setMursPiegesPotion(murs, pieges, potions);
+			setPlateau();
 			setPlateauPerso();
-			plateau = new char[X][Y];
+		}
 			
+			
+		public void setPlateau(){
+			//mise en place des cases sur le plateau 
+			plateau = new char[X][Y];
 			
 			for ( int x = 0 ; x<X; x++ )
 				for ( int y = 0 ; y<Y; y++ )
 					plateau[x][y]= '?';
-			
-			//mise en place des cases sur le plateau 
 			
 			Random r = new Random();
 			
@@ -63,12 +68,12 @@ public class Plateaudejeu {
 			}
 			
 			//placement des cases potion
-			while(potion>0) {
+			while(potions>0) {
 				int a=r.nextInt(X);
 				int b=r.nextInt(Y);
 				if(plateau[a][b]=='?') {
 					plateau[a][b]= 'P';
-					potion = potion-1;
+					potions = potions-1;
 				}
 			}
 			
@@ -80,8 +85,8 @@ public class Plateaudejeu {
 					}
 				}
 			}
-		//	setListPersonnage();
 		}
+
 		
 		public void setOnePlateau(char c, int[]pos) {
 			plateau[pos[0]][pos[1]]=c;
@@ -182,6 +187,7 @@ public class Plateaudejeu {
 			System.out.println();
 			}
 			}
+		
 
 
 		public char valeurcase (int x, int y) {
@@ -217,7 +223,7 @@ public class Plateaudejeu {
 			return player;
 		}
 		
-		public Personnage addPlayerServeur(String name) {
+		public int[] addPlayerServeur(Personnage p) {
 			
 			Random r = new Random();
 			int x=r.nextInt(X);
@@ -227,10 +233,8 @@ public class Plateaudejeu {
 				 y=r.nextInt(Y);	
 			}
 			int[]pos= {x,y};
-			Personnage player=new Personnage(name,pos);
 			plateau[x][y]='H';
-			//plateauPerso[x][y]=t.charAt(0);
-			return player;
+			return pos;
 		}
 		
 		//public void reveal(int[2] coord)

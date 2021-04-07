@@ -10,7 +10,7 @@ public class Personnage {
 	private ArrayList<Item>inventaire= new ArrayList<Item>();
 	private boolean alive=true;
 	private int[] position= new int[2];
-
+	private Plateaudejeu plateau = new Plateaudejeu(9,15,44,15,15);//Pas idéal...
 	
 	public Personnage(String name, int[]position) {
 		setName(name);
@@ -20,8 +20,17 @@ public class Personnage {
 	
 	public Personnage(String name){
 		setName(name); 
+		inventaire.add(Item.Bombe);
+	}
+	
+	public void setPlateau(Plateaudejeu plateau) {
+		this.plateau=plateau;
 	}
 
+	public Plateaudejeu getPlateau() {
+		return plateau;
+	}
+	
 	public int[] getPosition() {
 		return position;
 	}
@@ -41,8 +50,6 @@ public class Personnage {
 		else
 			System.out.println("Votre nom doit faire au moins 1 caractère et au maximum 10!");
 	}
-
-
 	
 	public int getPV() {
 		return pV;

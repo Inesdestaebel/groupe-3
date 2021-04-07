@@ -32,6 +32,9 @@ public class Server{
 		 			s = serverSocket.accept();
 		 			Client player = new Client(s);
 		 			System.out.println("Connexion réussie.");
+		 			PrintStream out = new PrintStream(s.getOutputStream());
+		 			//out.println("Veuillez entrer un nom");
+		 			//out.flush();
 		 			player.start();
 		 			partie.addPlayer(player);
 		 			if(partie.ready()) {
@@ -47,6 +50,7 @@ public class Server{
 	 
 	 public static void main(String argv[]) throws UnknownHostException, IOException {
 		new Server();
+		
 	 }
 }
 	
