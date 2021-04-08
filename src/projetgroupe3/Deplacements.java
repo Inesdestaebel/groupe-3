@@ -166,7 +166,7 @@ public class Deplacements{
 			String x = S.substring(i,i+1);
 			System.out.println("Déplacement:"+x);
 			Dep(H,P,x);
-			H.getPosition();
+			//H.getPosition();
 			i++;
 		}
 		}

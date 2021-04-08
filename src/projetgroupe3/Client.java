@@ -12,6 +12,7 @@ public class Client extends Thread{
 	    private Boolean fin=false;
 	    private Socket s;
 	    Personnage p = new Personnage (name);
+	    Personnage p2 = new Personnage (name);
 	    Deplacements D = new Deplacements(p);
 	    Deplacements Djoueurs = new Deplacements(p);
 	    private char[][] plateau;
@@ -172,7 +173,8 @@ public class Client extends Thread{
 				
 				if(c.D.getVictoire()==true || c.p.isAlive()==false) {
 					c.fin=true;
-					System.out.println("FIN");
+					String fin = c.in.readLine();
+					System.out.println(fin);
 				}
 	        }
 	    }

@@ -9,17 +9,17 @@ public class VisionJoueur implements Serializable{
 	private Deplacements dep;
 
 	public VisionJoueur(Client player) {
-		player.getPlateau();
-		player.p.getName();
-		player.p.getInventaire();
-		player.p.getPV();
+		//player.getPlateau();
+		//player.p.getName();
+		//player.p.getInventaire();
+		//player.p.getPV();
 	}
 	
 	public String showplateau(Client player) {
 		String a="";
-		for ( int x = 0 ; x<player.p.getPlateau().getX(); x++ ) {
-			for ( int y = 0 ; y<player.p.getPlateau().getY(); y++ ) {
-				a=a+player.p.getPlateau().valeurcaseperso(x, y);
+		for ( int x = 0 ; x<player.p2.getPlateau().getX(); x++ ) {
+			for ( int y = 0 ; y<player.p2.getPlateau().getY(); y++ ) {
+				a=a+player.p2.getPlateau().valeurcaseperso(x, y);
 			}
 		a=a+"\n";
 		}

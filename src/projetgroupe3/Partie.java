@@ -12,6 +12,7 @@ public class Partie extends Thread{
 	private int nb_joueurs;
 	private Plateaudejeu Plateau;
 	private static ArrayList<Client> joueurs = new ArrayList<>();
+	private String gagnant;
 	
 	public Partie(int X, int Y, int murs, int pieges, int potions, int nb_joueurs) {
 		this.nb_joueurs=nb_joueurs;
@@ -58,6 +59,7 @@ public class Partie extends Thread{
 			}
 		
 		//MISE EN PLACE DU PLATEAU DU JOUEUR EXACTEMENT COMME LE PLATEAU PRINCIPAL, OKKK FONCTIONNE 
+		//P2 PERMET DE PAS AVOIR LA POSITION MODIFIEE DE P AVEC LES BOUCLES
 		for (int i=0;i<joueurs.size();i++) {
 			Client player = joueurs.get(i);
 			player.setPlateau(X,Y);
@@ -65,7 +67,7 @@ public class Partie extends Thread{
 				for(int y=0;y<Y;y++) {
 					int[] pos= {x,y};
 					char a = Plateau.valeurcase(x, y);
-					player.p.getPlateau().setOnePlateau(a,pos);
+					player.p2.getPlateau().setOnePlateau(a,pos);
 				}
 			}
 		}
@@ -74,16 +76,16 @@ public class Partie extends Thread{
 			
 			//Ajout du joueur sur le plateau et on associe la position au joueur.
 			player.p.setPosition(Plateau.addPlayerServeur(player.p));
-			
+			player.p2.setPosition(player.p.getPosition());
 			//On met a jour le plateau du joueur en ajoutant le joueur à cette position.
-			player.p.getPlateau().setOnePlateau('H',player.p.getPosition());
-			player.p.getPlateau().setOnePlateauPerso('H',player.p.getPosition());
+			player.p2.getPlateau().setOnePlateau('H',player.p2.getPosition());
+			player.p2.getPlateau().setOnePlateauPerso('H',player.p2.getPosition());
 			
 			//On ajoute les fonctions de déplacements pour les deux plateaux
 			player.D = new Deplacements(player.p,Plateau); 
-			player.Djoueurs = new Deplacements(player.p,player.p.getPlateau()); 
+			player.Djoueurs = new Deplacements(player.p2,player.p.getPlateau()); 
 			
-			player.p.getPlateau().afficher(); //OK JUSTE
+			player.p2.getPlateau().afficher(); //OK JUSTE
 			System.out.println("");
 			
 		}
@@ -115,24 +117,31 @@ public class Partie extends Thread{
 				//ICI ON ATTEND LA CHAINE DE 4 CARACTERES ACTIONS DU JOUEUR
 			}
 			for(int i=0;i<joueurs.size();i++) {
-				//C'EST ICI QU'IL COMMENCE A Y AVOIR DES PROBLEMES! IL FAUT VOIR LES FONCTIONS DE DEP
 				Client player = joueurs.get(i);
-				player.Djoueurs.Move(player.actions, player.p , player.p.getPlateau());//Je mets
+				if(fin==false) {
+				player.Djoueurs.Move(player.actions, player.p2 , player.p2.getPlateau());//Je mets
 				//à jour le plateau personnel du joueur afin qu'il ai un plateau perso correct
-				player.p.getPlateau().afficher();
+				player.p2.getPlateau().afficher();
 				player.D.Move(player.actions, player.p ,Plateau);//Je mets a jour le plateau
 				//de la partie lorsqu'un joueur joue.
+				
 				Plateau.afficher();
 				player.setActions("a"); //Pour que players.ReadyActions() passe à faux
 				System.out.println("");
+				
 				if(player.D.getVictoire()) {
 					fin=true;
-					System.out.println(player.getNom()+" a gagné!!!");
+					gagnant = player.getNom();
+					System.out.println(gagnant+" a gagné!!!");
+				}
+				}
+				if(fin==true) {
+					player.send_message(gagnant+" a gagné!!!");
 				}
 			}
 		}
 			
-	}
+	}		
 }
 
 
