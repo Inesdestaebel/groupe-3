@@ -82,7 +82,12 @@ public class Personnage {
 	//-2PV lorsqu'il y a un piège
 	public void trap() {
 		int dmg=2;
-		setPV(this.getPV()-dmg);
+		if(pV-dmg<1) {
+			dead();
+		}else{
+			setPV(this.getPV()-dmg);
+		
+		}
 	}
 	// permet au Personnage de se soigner s’il possède une potion dans son inventaire
 	public void usePotion() {

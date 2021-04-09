@@ -12,7 +12,7 @@ public class Partie extends Thread{
 	private int nb_joueurs;
 	private Plateaudejeu Plateau;
 	private ArrayList<Client> joueurs = new ArrayList<>();
-	private String gagnant;
+	private String gagnant="";
 	
 	public Partie(int X, int Y, int murs, int pieges, int potions, int nb_joueurs) {
 		this.nb_joueurs=nb_joueurs;
@@ -96,16 +96,35 @@ public class Partie extends Thread{
 		
 		boolean fin=false;
 		while(fin==false) {
-			System.out.println("En attente des actions des joueurs...");
+			for (int i=0;i<joueurs.size();i++) {
+			Client player = joueurs.get(i);
+			
+			//ON VERIFIE QUE LE PERSONNAGE N'EST PAS MORT
+			if(player.p.isAlive()==false) {
+				System.out.println("Le joueur "+player.getNom()+" a perdu.");
+				player.send_message("Un joueur a perdu...");
+				player.send_message(player.getNom()+" a perdu!");
+				Plateau.setOnePlateau('~',player.p2.getPosition());
+				joueurs.remove(i);
+				if(joueurs.isEmpty()) {
+					System.out.println("Il n'y a plus de joueurs, la partie se termine...");
+					break;
+				}
+			}
+			}
+			
+			
 			for (int i=0;i<joueurs.size();i++) {
 				Client player = joueurs.get(i);
+			//ICI ON RENVOIE SON PLATEAU AU JOUEUR AVEC LE PERSO ET LES CONSIGNES
+			System.out.println("En attente des actions des joueurs...");
 				VisionJoueur v = new VisionJoueur(player);
 				player.send_message(v.showplateau(player));
 				player.send_message("fin plateau.");
 				player.send_message(v.showperso(player));
 				player.send_message(v.demandeactions(player));
 				player.send_message("fin demande.");
-				//ICI ON RENVOIE SON PLATEAU AU JOUEUR AVEC LE PERSO ET LES CONSIGNES
+
 
 			}
 			
@@ -122,14 +141,15 @@ public class Partie extends Thread{
 				//ICI ON ATTEND LA CHAINE DE 4 CARACTERES ACTIONS DU JOUEUR
 			}
 			for(int i=0;i<joueurs.size();i++) {
-				Client player = joueurs.get(i);
 				if(fin==false) {
+				Client player = joueurs.get(i);
 				System.out.println(player.actions);
 				System.out.println(player.p2);
 				player.p2.getPlateau().afficher();
 				player.send_message(player.Djoueurs.MoveClient(player.actions, player.p2 , player.p2.getPlateau()));//Je mets
 				player.send_message("fin actions.");
 				//à jour le plateau personnel du joueur afin qu'il ai un plateau perso correct
+				
 				player.p2.getPlateau().afficher();
 				player.D.Move(player.actions, player.p ,Plateau);//Je mets a jour le plateau
 				//de la partie lorsqu'un joueur joue.
@@ -143,7 +163,7 @@ public class Partie extends Thread{
 					gagnant = player.getNom();
 					System.out.println(gagnant+" a gagné!!!");
 				}
-				}
+				
 				if(fin==true) {
 					player.send_message(gagnant+" a gagné!!!");
 				}
@@ -151,6 +171,7 @@ public class Partie extends Thread{
 		}
 			
 	}		
+}
 }
 
 

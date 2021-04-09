@@ -287,9 +287,6 @@ public class Deplacements{
 			//Victoire
 			P.setOnePlateauPerso(P.valeurcase(pos2[0],pos2[1]), pos2);
 			if (P.valeurcase(pos2[0], pos2[1])==P.valeurcase(P.getObj()[0],P.getObj()[1])) {
-				System.out.println(P.getObj()[0]);
-				System.out.println(P.getObj()[1]);
-				System.out.println("VICTOIRE.");
 				cestGagne();
 			}
 			

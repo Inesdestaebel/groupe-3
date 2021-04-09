@@ -171,16 +171,26 @@ public class Client extends Thread{
 				c.out.println(move);
 				c.out.flush();
 				
+				
 				String resultatactions = c.in.readLine();
 				while(resultatactions.equals("fin actions.")==false) {
 					System.out.println(resultatactions);
 					resultatactions = c.in.readLine();
 					
 				}
-				if(c.D.getVictoire()==true || c.p.isAlive()==false) {
+				
+				
+				if(c.in.readLine().equals("Un joueur a perdu...")) {
+					String perdu=c.in.readLine();
+					System.out.println(perdu);
+					break;
+				}
+				
+				if(c.D.getVictoire()==true) {
 					c.fin=true;
 					String fin = c.in.readLine();
 					System.out.println(fin);
+					break;
 				}
 	        }
 	    }
