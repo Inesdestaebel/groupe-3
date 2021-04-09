@@ -171,6 +171,12 @@ public class Client extends Thread{
 				c.out.println(move);
 				c.out.flush();
 				
+				int k=0;
+				while(k<1) {
+					String dep = c.in.readLine();
+					System.out.println(dep);
+					k++;
+				}
 				if(c.D.getVictoire()==true || c.p.isAlive()==false) {
 					c.fin=true;
 					String fin = c.in.readLine();

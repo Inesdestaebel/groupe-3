@@ -11,7 +11,7 @@ public class Partie extends Thread{
 	private int potions;
 	private int nb_joueurs;
 	private Plateaudejeu Plateau;
-	private static ArrayList<Client> joueurs = new ArrayList<>();
+	private ArrayList<Client> joueurs = new ArrayList<>();
 	private String gagnant;
 	
 	public Partie(int X, int Y, int murs, int pieges, int potions, int nb_joueurs) {
@@ -57,7 +57,7 @@ public class Partie extends Thread{
 			System.out.println(player.getNom()+" est prêt.");
 			player.p = new Personnage(player.getNom());
 			}
-		
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		//MISE EN PLACE DU PLATEAU DU JOUEUR EXACTEMENT COMME LE PLATEAU PRINCIPAL, OKKK FONCTIONNE 
 		//P2 PERMET DE PAS AVOIR LA POSITION MODIFIEE DE P AVEC LES BOUCLES
 		for (int i=0;i<joueurs.size();i++) {
