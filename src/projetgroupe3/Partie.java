@@ -57,7 +57,7 @@ public class Partie extends Thread{
 			System.out.println(player.getNom()+" est prêt.");
 			player.p = new Personnage(player.getNom());
 			}
-		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		
 		//MISE EN PLACE DU PLATEAU DU JOUEUR EXACTEMENT COMME LE PLATEAU PRINCIPAL, OKKK FONCTIONNE 
 		//P2 PERMET DE PAS AVOIR LA POSITION MODIFIEE DE P AVEC LES BOUCLES
 		for (int i=0;i<joueurs.size();i++) {
@@ -98,8 +98,11 @@ public class Partie extends Thread{
 				Client player = joueurs.get(i);
 				VisionJoueur v = new VisionJoueur(player);
 				player.send_message(v.showplateau(player));
+				System.out.println(v.showplateau(player));
+				player.send_message("fin plateau.");
 				player.send_message(v.showperso(player));
 				player.send_message(v.demandeactions(player));
+				player.send_message("fin demande.");
 				//ICI ON RENVOIE SON PLATEAU AU JOUEUR AVEC LE PERSO ET LES CONSIGNES
 
 			}
@@ -120,6 +123,7 @@ public class Partie extends Thread{
 				Client player = joueurs.get(i);
 				if(fin==false) {
 				player.send_message(player.Djoueurs.MoveClient(player.actions, player.p2 , player.p2.getPlateau()));//Je mets
+				player.send_message("fin actions.");
 				//à jour le plateau personnel du joueur afin qu'il ai un plateau perso correct
 				player.p2.getPlateau().afficher();
 				player.D.Move(player.actions, player.p ,Plateau);//Je mets a jour le plateau

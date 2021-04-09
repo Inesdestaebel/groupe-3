@@ -1,19 +1,10 @@
 package projetgroupe3;
 
-import java.net.*;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-
+import java.net.*; 
 import java.io.*;
 
 public class Server{
 	public static final int PORT=5112;
-	private static ArrayList<Partie> n = new ArrayList<>();
-	private static ExecutorService pool = Executors.newCachedThreadPool();
-	
 
 	 public Server() {
 		 ServerSocket serverSocket = null;
@@ -25,7 +16,7 @@ public class Server{
 		 	int nb_j; 
 		 	while(true) {
 		 	nb_j = 2 + (int)(Math.random() * ((5 - 2) + 1));
-		 	Partie partie = new Partie(9,15,44,15,15,nb_j);
+		 	Partie partie = new Partie(9,15,44,15,15,2);
 		 		Socket s;
 		 		try {
 		 			while(partie.ready()==false) {

@@ -146,21 +146,21 @@ public class Client extends Thread{
 	      System.out.println("");
 	      
 	       while(c.fin==false) {
-	    	   int i = 0;
-			   while(i<10) {
-			   String plateau = c.in.readLine();
+	    	   String plateau = c.in.readLine();
+			   while(plateau.equals("fin plateau.")==false) {
 			   System.out.println(plateau);
-			   i++;
+			   plateau = c.in.readLine();
 			   }
 			   
 			   String personnage = c.in.readLine();
 			   System.out.println(personnage);
+			   System.out.println("");
 			   
-			   int j=0;
-			   while(j<8) {
-				   String demandeactions = c.in.readLine();
+			   String demandeactions = c.in.readLine();
+			   while(demandeactions.equals("fin demande.")==false) {
 				   System.out.println(demandeactions);
-				   j++;
+				   demandeactions = c.in.readLine();
+				   
 			   }
 	        	
 				String move = sc.next();
@@ -171,11 +171,11 @@ public class Client extends Thread{
 				c.out.println(move);
 				c.out.flush();
 				
-				int k=0;
-				while(k<1) {
-					String dep = c.in.readLine();
-					System.out.println(dep);
-					k++;
+				String resultatactions = c.in.readLine();
+				while(resultatactions.equals("fin actions.")==false) {
+					System.out.println(resultatactions);
+					resultatactions = c.in.readLine();
+					
 				}
 				if(c.D.getVictoire()==true || c.p.isAlive()==false) {
 					c.fin=true;
