@@ -83,7 +83,7 @@ public class Partie extends Thread{
 			
 			//On ajoute les fonctions de déplacements pour les deux plateaux
 			player.D = new Deplacements(player.p,Plateau); 
-			player.Djoueurs = new Deplacements(player.p2,player.p.getPlateau()); 
+			player.Djoueurs = new Deplacements(player.p2,player.p2.getPlateau()); 
 			
 			player.p2.getPlateau().afficher(); //OK JUSTE
 			System.out.println("");
@@ -119,7 +119,7 @@ public class Partie extends Thread{
 			for(int i=0;i<joueurs.size();i++) {
 				Client player = joueurs.get(i);
 				if(fin==false) {
-				player.Djoueurs.Move(player.actions, player.p2 , player.p2.getPlateau());//Je mets
+				player.send_message(player.Djoueurs.MoveClient(player.actions, player.p2 , player.p2.getPlateau()));//Je mets
 				//à jour le plateau personnel du joueur afin qu'il ai un plateau perso correct
 				player.p2.getPlateau().afficher();
 				player.D.Move(player.actions, player.p ,Plateau);//Je mets a jour le plateau

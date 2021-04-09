@@ -110,7 +110,32 @@ public class Personnage {
 		
 	}
 
-	
+public String usePotionClient() {
+		String str="";
+		int heal=3;
+		if (!getInventaire().isEmpty()) {
+			int i=0;
+			while ((i<getInventaire().size()-1) & (getInventaire().get(i)!=Item.Potion)) {
+				i++;
+			}
+			if (getInventaire().get(i)==Item.Potion) {
+				setPV(this.getPV()+heal);
+				str+="Vous utilisez une potion, +"+heal+" HP\n";
+				inventaire.remove(i);
+			}
+			else {
+				str+="Vous n'avez pas de potion dans votre inventaire...\n";
+
+			}
+		}
+		else {
+			str+="Votre inventaire est vide\n";
+
+		}
+		return str;
+		
+	}
+
 	// L'objet bombe detruit tous les murs autour du personnage lors de son utilisation. On en a une seule
 	//pour tout le jeu, il n'y en a pas sur le plateau. On a crée cet objet pour éviter d'être coincé entre 
 	//des murs lors d'une partie.
@@ -153,6 +178,7 @@ public class Personnage {
 						p.setOnePlateauPerso(' ',left);;
 					}
 				}
+				System.out.println("BOOM!");
 				inventaire.remove(i);
 			}
 			else {
@@ -165,7 +191,57 @@ public class Personnage {
 	}
 
 		
+	public String useBombClient(Plateaudejeu p) {
+		String str="";
+		if (!getInventaire().isEmpty()) {
+			int i=0;
+			while ((i<getInventaire().size()-1) & (getInventaire().get(i)!=Item.Bombe)) {
+				i++;
+			}
+			if (getInventaire().get(i)==Item.Bombe) {
+				if (getPosition()[0]+1<p.getX()) {
+					if (p.valeurcase(getPosition()[0]+1, getPosition()[1])=='#') {
+						int[] down={getPosition()[0]+1,getPosition()[1]};
+						p.setOnePlateau(' ',down);
+						p.setOnePlateauPerso(' ',down);;
+					}
+				}
+				
+				if (getPosition()[0]-1>=0) {
+					if (p.valeurcase(getPosition()[0]-1, getPosition()[1])=='#') {
+						int[] up ={getPosition()[0]-1,getPosition()[1]};
+						p.setOnePlateau(' ',up);
+						p.setOnePlateauPerso(' ',up);;
+					}
+				}
+				
+				if (getPosition()[1]+1<p.getY()) {
+					if (p.valeurcase(getPosition()[0], getPosition()[1]+1)=='#') {
+						int[] right ={getPosition()[0],getPosition()[1]+1};
+						p.setOnePlateau(' ',right);
+						p.setOnePlateauPerso(' ',right);;
+					}
+				}
+				
+				if (getPosition()[1]-1>=0) {
+					if (p.valeurcase(getPosition()[0], getPosition()[1]-1)=='#') {
+						int[] left = {getPosition()[0],getPosition()[1]-1};
 
+						p.setOnePlateau(' ',left);
+						p.setOnePlateauPerso(' ',left);;
+					}
+				}
+				str+="BOOM!\n";
+				inventaire.remove(i);
+			}
+			else {
+				str+="Vous n'avez pas de bombe dans votre inventaire...\n";
+
+			}
+		}
+		else str+="Inventaire vide\n";
+		return str;
+	}
 	
 	@Override
 	public String toString() {

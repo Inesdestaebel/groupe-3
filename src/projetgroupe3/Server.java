@@ -22,9 +22,12 @@ public class Server{
 		 	}catch (IOException e) {
 		 		e.printStackTrace();
 		 	}
-		 	
+		 	//int nb_j; 
+		 	//while(true) {
+		 	//nb_j = 2 + (int)(Math.random() * ((5 - 2) + 1));
 		 	Partie partie = new Partie(9,15,44,15,15,2);
-		 	while(true) {
+ 			//while(partie.ready()==false) {
+		 	while (true) {
 		 		Socket s;
 		 		try {
 		 			while(partie.ready()==false) {
@@ -42,6 +45,7 @@ public class Server{
 		 			e.printStackTrace();
 		 		}
 		 	}
+		 	//}
 	 }
 	 
 	 
