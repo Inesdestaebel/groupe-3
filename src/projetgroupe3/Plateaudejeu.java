@@ -125,6 +125,10 @@ public class Plateaudejeu {
 			return obj;
 		}
 		
+		public void setObj(int[] obj) {
+			this.obj=obj;
+		}
+		
 		public int getMurs() {
 			return murs;
 		}

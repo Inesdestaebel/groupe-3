@@ -68,6 +68,9 @@ public class Partie extends Thread{
 					int[] pos= {x,y};
 					char a = Plateau.valeurcase(x, y);
 					player.p2.getPlateau().setOnePlateau(a,pos);
+					if(a=='V') {
+						player.p2.getPlateau().setObj(pos);
+					}
 				}
 			}
 		}
@@ -98,7 +101,6 @@ public class Partie extends Thread{
 				Client player = joueurs.get(i);
 				VisionJoueur v = new VisionJoueur(player);
 				player.send_message(v.showplateau(player));
-				System.out.println(v.showplateau(player));
 				player.send_message("fin plateau.");
 				player.send_message(v.showperso(player));
 				player.send_message(v.demandeactions(player));
@@ -122,6 +124,9 @@ public class Partie extends Thread{
 			for(int i=0;i<joueurs.size();i++) {
 				Client player = joueurs.get(i);
 				if(fin==false) {
+				System.out.println(player.actions);
+				System.out.println(player.p2);
+				player.p2.getPlateau().afficher();
 				player.send_message(player.Djoueurs.MoveClient(player.actions, player.p2 , player.p2.getPlateau()));//Je mets
 				player.send_message("fin actions.");
 				//à jour le plateau personnel du joueur afin qu'il ai un plateau perso correct
