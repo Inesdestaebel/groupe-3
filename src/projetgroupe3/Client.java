@@ -134,12 +134,18 @@ public class Client extends Thread{
 	    	Scanner sc = new Scanner(System.in);
 	    	Socket socket = new Socket("localhost", 5112);
 	    	Client c = new Client(socket);
+	    	
 	    	System.out.println("Bonjour, veuillez entrer un nom!");
 	    	String n = sc.next();
+	    	while(n.length()>10 || n.length()<=0) {
+	    		System.out.println("Votre nom doit faire au moins 1 caractère et au maximum 10!");
+	    		n=sc.next();
+	    	}
 	    	c.p.setName(n);
 	    	c.p2.setName(n);
 		    c.out.println(n);
 		    c.out.flush();
+	    	
 	    	System.out.println("Entrez un A si vous êtes prêts.");
 	    	String r = sc.next();
 	        while(r.equals("A")==false) {

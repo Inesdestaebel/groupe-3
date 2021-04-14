@@ -119,8 +119,10 @@ public class Deplacements{
 			System.out.println("Ceci n'est pas une action valide.");
 			}
 		
-		//Victoire
+		
 		P.setOnePlateauPerso(P.valeurcase(pos2[0],pos2[1]), pos2);
+		
+		//Victoire
 		if (P.valeurcase(pos2[0], pos2[1])==P.valeurcase(P.getObj()[0],P.getObj()[1])) {
 			cestGagne();
 		}
@@ -150,6 +152,12 @@ public class Deplacements{
 			H.trap();
 
 		}
+		
+		else if(getCaseActu()=='H') {
+			System.out.println("Vous marchez sur la même case qu'un autre joueur, -2PV.");
+			H.trap();
+		}
+		
 		//Plus de vie...
 		if (H.getPV()<1) {
 			System.out.println("Vous etes mort\n GAME OVER");
@@ -171,13 +179,13 @@ public class Deplacements{
 		}
 	
 	
-	public String MoveClient(String S, Personnage H, Plateaudejeu P) {
+	public String MoveClient(String S, Personnage H, Plateaudejeu P, Plateaudejeu plateaugeneral) {
 		String str="";
 		int i=0;
 		while((i<S.length())&&(!getVictoire())&&(H.isAlive())) {
 			String x = S.substring(i,i+1);
 			str+="Déplacement:"+x+"  ";
-			str+=DepClient(H,P,x);
+			str+=DepClient(H,P,x,plateaugeneral);
 			i++;
 			}
 		return str;
@@ -193,7 +201,7 @@ public class Deplacements{
 	}
 	
 	//Déplacements gauche, droite, en haut, en bas et actions ( Ramasser, utiliser une potion... )
-		public String DepClient(Personnage H, Plateaudejeu P, String dep) {
+		public String DepClient(Personnage H, Plateaudejeu P, String dep, Plateaudejeu plateaugeneral) {
 			String str="";
 			int[] pos = H.getPosition();
 			int x = pos[0];
@@ -315,6 +323,12 @@ public class Deplacements{
 				H.trap();
 
 			}
+			
+			else if(plateaugeneral.valeurcase(pos2[0],pos2[1])=='H') {
+				str+="Vous marchez sur la même case qu'un autre joueur, -2PV.\n";
+				H.trap();
+			}
+			
 			//Plus de vie...
 			if (H.getPV()<1) {
 				str+="Vous etes mort\n GAME OVER\n";

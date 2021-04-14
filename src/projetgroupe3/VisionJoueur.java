@@ -9,10 +9,6 @@ public class VisionJoueur implements Serializable{
 	private Deplacements dep;
 
 	public VisionJoueur(Client player) {
-		//player.getPlateau();
-		//player.p.getName();
-		//player.p.getInventaire();
-		//player.p.getPV();
 	}
 	
 	public String showplateau(Client player) {
@@ -42,8 +38,5 @@ public class VisionJoueur implements Serializable{
 		return a;
 	}
 	
-	//public String explicdeplacement(Client player) {
-	//	
-	//}
 	
 }
