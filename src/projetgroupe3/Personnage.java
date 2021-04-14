@@ -3,14 +3,13 @@ package projetgroupe3;
 import java.util.ArrayList;
 
 
-
 public class Personnage {
 	private String name;
 	private int pV=5;
 	private ArrayList<Item>inventaire= new ArrayList<Item>();
 	private boolean alive=true;
 	private int[] position= new int[2];
-	private Plateaudejeu plateau = new Plateaudejeu(9,15,44,15,15);//Pas idéal...
+	private Plateaudejeu P;
 	
 	public Personnage(String name, int[]position) {
 		setName(name);
@@ -23,9 +22,13 @@ public class Personnage {
 		inventaire.add(Item.Bombe);
 	}
 	
+	public void setPlateau(int X,int Y) {
+		this.P = new Plateaudejeu(X,Y);
+
+	}
 
 	public Plateaudejeu getPlateau() {
-		return plateau;
+		return P;
 	}
 	
 	public int[] getPosition() {

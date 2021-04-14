@@ -54,6 +54,10 @@ public class Client extends Thread{
 	   		return name;
 	   }
 	   
+	   public void setFin(Boolean n) {
+		   this.fin=n;
+	   }
+	   
 	   public char[][] getPlateau(){
 		   return plateau;
 	   }
@@ -111,8 +115,11 @@ public class Client extends Thread{
 		   
  
 		   while(fin==false) {
+			   try {
 			   String action =in.readLine();
 			   setActions(action);
+			   } catch (SocketException e) {
+			   }
 		   }
 		   
 		   
@@ -130,6 +137,7 @@ public class Client extends Thread{
 	    	System.out.println("Bonjour, veuillez entrer un nom!");
 	    	String n = sc.next();
 	    	c.p.setName(n);
+	    	c.p2.setName(n);
 		    c.out.println(n);
 		    c.out.flush();
 	    	System.out.println("Entrez un A si vous êtes prêts.");
@@ -140,12 +148,28 @@ public class Client extends Thread{
 	        }
 	        c.out.println(r);
 	        c.out.flush();
-	        
+	      
 	      String messageentree = c.in.readLine();
 	      System.out.println(messageentree);
 	      System.out.println("");
 	      
 	       while(c.fin==false) {
+	    	   
+	    	   String nbjoueurs = c.in.readLine();
+	    	   System.out.println(nbjoueurs);
+	    	   System.out.println("");
+	    	   
+	    	   if (nbjoueurs.equals("Vous avez perdu!")){
+	    		   break;
+	    	   }
+	    	   
+	    	  if(nbjoueurs.equals("La partie est terminée!")){
+	    		   nbjoueurs = c.in.readLine();
+	    		   System.out.println(nbjoueurs);
+	    		   break;
+	    	   }
+	    			   
+	    			   
 	    	   String plateau = c.in.readLine();
 			   while(plateau.equals("fin plateau.")==false) {
 			   System.out.println(plateau);
@@ -177,20 +201,6 @@ public class Client extends Thread{
 					System.out.println(resultatactions);
 					resultatactions = c.in.readLine();
 					
-				}
-				
-				
-				if(c.in.readLine().equals("Un joueur a perdu...")) {
-					String perdu=c.in.readLine();
-					System.out.println(perdu);
-					break;
-				}
-				
-				if(c.D.getVictoire()==true) {
-					c.fin=true;
-					String fin = c.in.readLine();
-					System.out.println(fin);
-					break;
 				}
 	        }
 	    }

@@ -15,7 +15,11 @@ public class Plateaudejeu {
 		private int[] obj= new int[2];
 		//private Personnage[] listPesronnage;
 		
-	
+		public Plateaudejeu(int X, int Y) {
+			setX(X);
+			setY(Y);
+			setPlateauXY();
+		}
 		
 		//Constructeur
 		public Plateaudejeu(int X, int Y, int murs, int pieges, int potions) {
@@ -26,7 +30,16 @@ public class Plateaudejeu {
 			setPlateau();
 			setPlateauPerso();
 		}
-			
+		
+		public void setPlateauXY() {
+			plateau = new char[X][Y];
+			plateauPerso = new char [X][Y];
+			for ( int x = 0 ; x<X; x++ )
+				for ( int y = 0 ; y<Y; y++ ) {
+					plateau[x][y]= '?';
+					plateauPerso[x][y]='?';
+		}
+		}
 			
 		public void setPlateau(){
 			//mise en place des cases sur le plateau 

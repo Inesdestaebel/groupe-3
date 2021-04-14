@@ -62,7 +62,8 @@ public class Partie extends Thread{
 		//P2 PERMET DE PAS AVOIR LA POSITION MODIFIEE DE P AVEC LES BOUCLES
 		for (int i=0;i<joueurs.size();i++) {
 			Client player = joueurs.get(i);
-			player.setPlateau(X,Y);
+			//player.setPlateau(X,Y);
+			player.p2.setPlateau(X, Y);
 			for(int x=0;x<X;x++) {
 				for(int y=0;y<Y;y++) {
 					int[] pos= {x,y};
@@ -96,36 +97,18 @@ public class Partie extends Thread{
 		
 		boolean fin=false;
 		while(fin==false) {
-			for (int i=0;i<joueurs.size();i++) {
-			Client player = joueurs.get(i);
 			
-			//ON VERIFIE QUE LE PERSONNAGE N'EST PAS MORT
-			if(player.p.isAlive()==false) {
-				System.out.println("Le joueur "+player.getNom()+" a perdu.");
-				player.send_message("Un joueur a perdu...");
-				player.send_message(player.getNom()+" a perdu!");
-				Plateau.setOnePlateau('~',player.p2.getPosition());
-				joueurs.remove(i);
-				if(joueurs.isEmpty()) {
-					System.out.println("Il n'y a plus de joueurs, la partie se termine...");
-					break;
-				}
-			}
-			}
-			
-			
+			System.out.println("En attente des actions des joueurs...");
 			for (int i=0;i<joueurs.size();i++) {
 				Client player = joueurs.get(i);
-			//ICI ON RENVOIE SON PLATEAU AU JOUEUR AVEC LE PERSO ET LES CONSIGNES
-			System.out.println("En attente des actions des joueurs...");
+				//ICI ON RENVOIE SON PLATEAU AU JOUEUR AVEC LE PERSO ET LES CONSIGNES
 				VisionJoueur v = new VisionJoueur(player);
+				player.send_message("Vous êtes encore "+joueurs.size()+" joueurs sur cette partie.");
 				player.send_message(v.showplateau(player));
 				player.send_message("fin plateau.");
 				player.send_message(v.showperso(player));
 				player.send_message(v.demandeactions(player));
 				player.send_message("fin demande.");
-
-
 			}
 			
 			for (int i=0;i<joueurs.size();i++) {
@@ -141,11 +124,11 @@ public class Partie extends Thread{
 				//ICI ON ATTEND LA CHAINE DE 4 CARACTERES ACTIONS DU JOUEUR
 			}
 			for(int i=0;i<joueurs.size();i++) {
-				if(fin==false) {
 				Client player = joueurs.get(i);
+				System.out.println(player.p);
 				System.out.println(player.actions);
-				System.out.println(player.p2);
 				player.p2.getPlateau().afficher();
+				System.out.println(" ");
 				player.send_message(player.Djoueurs.MoveClient(player.actions, player.p2 , player.p2.getPlateau()));//Je mets
 				player.send_message("fin actions.");
 				//à jour le plateau personnel du joueur afin qu'il ai un plateau perso correct
@@ -161,17 +144,40 @@ public class Partie extends Thread{
 				if(player.D.getVictoire()) {
 					fin=true;
 					gagnant = player.getNom();
-					System.out.println(gagnant+" a gagné!!!");
-				}
-				
-				if(fin==true) {
-					player.send_message(gagnant+" a gagné!!!");
+					
 				}
 			}
+		
+			for (int i=0;i<joueurs.size();i++) {
+				Client player = joueurs.get(i);
+				//ON VERIFIE QUE LE PERSONNAGE N'EST PAS MORT
+				if(player.p.isAlive()==false) {
+					System.out.println("Le joueur "+player.getNom()+" a perdu.");
+					player.send_message("Vous avez perdu!");
+					Plateau.setOnePlateau('~',player.p2.getPosition());
+					joueurs.remove(i);
+				}
+				if(joueurs.isEmpty()) {
+					fin=true;
+					}
+			}				
+	}
+	
+	if(fin==true) {
+		if(joueurs.isEmpty()) {
+			System.out.println("Il n'y a plus de joueurs, la partie se termine...");
 		}
-			
-	}		
-}
+		else {
+		System.out.println("La partie est terminée, "+gagnant+" a gagné.");
+		for (int i=0;i<joueurs.size();i++) {
+		Client player = joueurs.get(i);
+		player.send_message("La partie est terminée!");
+		player.send_message(gagnant+" a gagné!");
+		player.interrupt();
+		}
+	   }
+      }
+	}
 }
 
 

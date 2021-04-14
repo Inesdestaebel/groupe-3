@@ -16,7 +16,7 @@ public class Server{
 		 	int nb_j; 
 		 	while(true) {
 		 	nb_j = 2 + (int)(Math.random() * ((5 - 2) + 1));
-		 	Partie partie = new Partie(9,15,44,15,15,2);
+		 	Partie partie = new Partie(9,15,44,15,15,nb_j);
 		 		Socket s;
 		 		try {
 		 			while(partie.ready()==false) {
