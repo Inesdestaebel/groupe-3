@@ -119,6 +119,8 @@ public class Client extends Thread{
 			   String action =in.readLine();
 			   setActions(action);
 			   } catch (SocketException e) {
+				   send_message("La connexion est perdue!");
+				   fin=true;
 			   }
 		   }
 		   
@@ -209,6 +211,7 @@ public class Client extends Thread{
 					
 				}
 	        }
+	       socket.close();
 	    }
 }
 

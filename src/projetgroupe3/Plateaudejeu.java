@@ -9,11 +9,9 @@ public class Plateaudejeu {
 		private int murs;
 		private int pieges;
 		private int potions;
-		//private int nbjoueur;
 		private char[][] plateau;
 		private char[][] plateauPerso;
 		private int[] obj= new int[2];
-		//private Personnage[] listPesronnage;
 		
 		public Plateaudejeu(int X, int Y) {
 			setX(X);
@@ -26,7 +24,7 @@ public class Plateaudejeu {
 			setX(X);
 			setY(Y);
 			//setNbjoueur(nbjoueur);
-			setMursPiegesPotion(murs, pieges, potions);
+			setMursPiegesPotions(murs, pieges, potions);
 			setPlateau();
 			setPlateauPerso();
 		}
@@ -155,7 +153,7 @@ public class Plateaudejeu {
 			return potions;
 		}
 
-		public void setMursPiegesPotion(int murs, int pieges, int potion) {
+		public void setMursPiegesPotions(int murs, int pieges, int potion) {
 			if (murs+pieges+potion<X*Y) {
 				this.murs = murs;
 				this.potions=potion;

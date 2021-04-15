@@ -48,8 +48,10 @@ public class Partie extends Thread{
 		for(Client player : joueurs) {
 			while(player.isReady()==false) {  
 			try {
-				if(player.isAlive()==false) {
+				if(player.getSocket().isClosed()) {
+					player.Ready(true);
 					joueurs.remove(player);
+					continue;
 				}
 				else {
 					Thread.sleep(10);
@@ -105,8 +107,7 @@ public class Partie extends Thread{
 			//for (int i=0;i<joueurs.size();i++) {
 				//Client player = joueurs.get(i);
 			
-			for (int i=0;i<joueurs.size();i++) {
-				Client player = joueurs.get(i);
+			for (Client player : joueurs) {
 				//ICI ON RENVOIE SON PLATEAU AU JOUEUR AVEC LE PERSO ET LES CONSIGNES
 				VisionJoueur v = new VisionJoueur(player);
 				player.send_message("Vous êtes actuellement "+joueurs.size()+" joueurs sur cette partie.");
@@ -120,18 +121,17 @@ public class Partie extends Thread{
 			
 			
 			System.out.println("En attente des actions des joueurs...");
-			for (int i=0;i<joueurs.size();i++) {
-				Client player = joueurs.get(i);
-				while(player.ReadyActions()==false && player.p.isAlive() && player.isAlive()) {
+			for (Client player : joueurs) {
+				while(player.ReadyActions()==false && player.p.isAlive()) {
 					try {
-						//if(player.getState()) {
-						//	joueurs.remove(i);
-						//	System.out.println("hi");
-						//}
-						//else {
-							//System.out.println(player.isAlive());
+						if(player.getSocket().isClosed()) {
+							player.setActions("DDDD");
+							joueurs.remove(player);
+							continue;
+						}
+						else {
 							Thread.sleep(10);
-						//}
+						}
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
