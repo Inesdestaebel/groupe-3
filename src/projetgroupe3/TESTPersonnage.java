@@ -40,22 +40,28 @@ public class TESTPersonnage {
 		P.addPotion();
 		System.out.println(P.getInventaire());
 		
-		//TESTAlivedead
-		System.out.println(P.isAlive());
-		P.dead();
-		System.out.println(P.isAlive());
-		
+		System.out.println(P);
 		//TESTTrapPotion
 		P.trap();
 		System.out.println(P.getPV());
 		P.trap();
 		System.out.println(P.getPV());
-		P.trap();
+		P.usePotion();
+		System.out.println(P.isAlive());
+		System.out.println(P);
+		
+		//TESTAlivedead
+		System.out.println(P.isAlive());
+		P.dead();
 		System.out.println(P.isAlive());
 		
 		//TESTUseBomb il faudrait un plateau pour mieux tester...
 		//System.out.println(P.getInventaire());
 		//P.useBomb(p);
+	
+		//TEST usePotionClient 
+		String s=P.usePotionClient();
+		System.out.println(s);
 		
 		//TESTToString
 		System.out.println(P);

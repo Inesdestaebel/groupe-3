@@ -252,6 +252,7 @@ public class Plateaudejeu {
 			}
 			int[]pos= {x,y};
 			plateau[x][y]='H';
+			p.setPosition(pos);
 			return pos;
 		}
 		

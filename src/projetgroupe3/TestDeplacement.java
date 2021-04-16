@@ -12,43 +12,54 @@ public class TestDeplacement {
 		dpl.setCaseActu('X');
 		System.out.println("setCaseActu('X'), getCaseActu(): "+dpl.getCaseActu());
 
-		System.out.println("victoire?"+dpl.getVictoire());
-		dpl.cestGagne();
-		System.out.println("victoire apres cestGagne(): "+dpl.getVictoire());
-		
+				
 		System.out.println("Test monter");
 		String s="Z";
-		dpl.Dep (s);
+		dpl.Dep(s);
 		
 		System.out.println("Test descendre");
 		s="S";
-		dpl.Dep (s);
+		dpl.Dep(s);
 		
 		System.out.println("Test a gauche");
 		s="Q";
-		dpl.Dep (s);
+		dpl.Dep(s);
 		
 		System.out.println("Test a droite");
 		s="D";
-		dpl.Dep (s);
+		dpl.Dep(s);
 		
 		System.out.println("Test ramasser");
 		s="R";
-		dpl.Dep (s);
+		dpl.Dep(s);
 		
 		System.out.println("Test utiliser potion");
 		s="E";
-		dpl.Dep (s);
+		dpl.Dep(s);
 
 		System.out.println("Test utiliser bombe");
 		s="B";
-		dpl.Dep (s);
+		dpl.Dep(s);
 		
 		System.out.println("Test invalid command 'm'");
 		s="m";
-		dpl.Dep (s);
+		dpl.Dep(s);
 		System.out.println("Test utiliser bombe");
 		s="B";
-		dpl.Dep (s);
+		dpl.Dep(s);
+		
+		System.out.println("Test Move");
+		s="ZQSDREBmj";
+		dpl.Move (s);
+		
+		
+		System.out.println("Test DepClient dans MoveClient");
+		s="ZQSDREBmj";
+		System.out.println(dpl.MoveClient (s,plateau));		
+		System.out.println("victoire?: "+dpl.getVictoire());
+		dpl.cestGagne();
+		System.out.println("victoire apres cestGagne(): "+dpl.getVictoire());
+
+		
 	}
 }
