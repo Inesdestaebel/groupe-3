@@ -190,7 +190,7 @@ public class Partie extends Thread{
 			System.out.println("Il n'y a plus de joueurs, la partie se termine...");
 		}
 		else {
-		System.out.println("La partie est terminée, "+gagnant+" a gagné.");
+		System.out.println("La partie est terminée, "+gagnant+" a gagné!");
 		for (int i=0;i<joueurs.size();i++) {
 		Client player = joueurs.get(i);
 		player.send_message("La partie est terminée!");
