@@ -17,7 +17,7 @@ public class TestPlateau {
 		String move = "DDDD";                                                          
 		
 		//Utilisation des fonctions de déplacement                                                                  
-		D.Move(move, H, p);                                 
+		D.Move(move);                                 
 		p.afficher();                                 
 		System.out.println(H);                                                               
 	
@@ -31,7 +31,7 @@ public class TestPlateau {
 		p2.afficher();                             
 		String move2 = "DDDD";
 		
-		D2.Move(move2, T, p2);                             
+		D2.Move(move2);                             
 		p2.afficher();                             
 		System.out.println(H);                             
 		} 

@@ -19,7 +19,6 @@ public class Main {
 		Scanner s = new Scanner(System.in);
 		System.out.println("Veuillez entrer votre nom :");
 		String name =s.next();
-		//plateau.addPlayer(name);
 		Personnage H = plateau.addPlayer(name);
 		plateau.afficherPlateauPerso();
 		
@@ -32,7 +31,6 @@ public class Main {
 		System.out.println("R vous permet de ramasser un objet.");
 		System.out.println("E vous permet d'utiliser une potion.");
 		System.out.println("B vous permet d'utiliser une bombe.");
-		//plateau.afficher();
 		
 			
 		//Déplacements du joueur
@@ -47,7 +45,7 @@ public class Main {
 				
 		//Utilisation des fonctions de déplacement
 				
-				D.Move(move, H, plateau);
+				D.Move(move);
 				plateau.afficherPlateauPerso();
 				System.out.println(H);
 				//plateau.afficher();

@@ -18,37 +18,37 @@ public class TestDeplacement {
 		
 		System.out.println("Test monter");
 		String s="Z";
-		dpl.Dep (H, plateau,s);
+		dpl.Dep (s);
 		
 		System.out.println("Test descendre");
 		s="S";
-		dpl.Dep (H, plateau,s);
+		dpl.Dep (s);
 		
 		System.out.println("Test a gauche");
 		s="Q";
-		dpl.Dep (H, plateau,s);
+		dpl.Dep (s);
 		
 		System.out.println("Test a droite");
 		s="D";
-		dpl.Dep (H, plateau,s);
+		dpl.Dep (s);
 		
 		System.out.println("Test ramasser");
 		s="R";
-		dpl.Dep (H, plateau,s);
+		dpl.Dep (s);
 		
 		System.out.println("Test utiliser potion");
 		s="E";
-		dpl.Dep (H, plateau,s);
+		dpl.Dep (s);
 
 		System.out.println("Test utiliser bombe");
 		s="B";
-		dpl.Dep (H, plateau,s);
+		dpl.Dep (s);
 		
 		System.out.println("Test invalid command 'm'");
 		s="m";
-		dpl.Dep (H, plateau,s);
+		dpl.Dep (s);
 		System.out.println("Test utiliser bombe");
 		s="B";
-		dpl.Dep (H, plateau,s);
+		dpl.Dep (s);
 	}
 }

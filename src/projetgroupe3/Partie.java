@@ -1,6 +1,7 @@
 package projetgroupe3;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.io.*;
 
 public class Partie extends Thread{
@@ -48,14 +49,7 @@ public class Partie extends Thread{
 		for(Client player : joueurs) {
 			while(player.isReady()==false) {  
 			try {
-				if(player.getSocket().isClosed()) {
-					player.Ready(true);
-					joueurs.remove(player);
-					continue;
-				}
-				else {
-					Thread.sleep(10);
-				}
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -63,6 +57,7 @@ public class Partie extends Thread{
 			
 			System.out.println(player.getNom()+" est prêt.");
 			player.p = new Personnage(player.getNom());
+			player.p2 = new Personnage(player.getNom());
 			}
 		
 		//MISE EN PLACE DU PLATEAU DU JOUEUR EXACTEMENT COMME LE PLATEAU PRINCIPAL, OKKK FONCTIONNE 
@@ -103,11 +98,14 @@ public class Partie extends Thread{
 		
 		boolean fin=false;
 		while(fin==false) {
-			
-			//for (int i=0;i<joueurs.size();i++) {
-				//Client player = joueurs.get(i);
-			
 			for (Client player : joueurs) {
+				if(player.isAlive()==false) {
+					System.out.println("heho");
+					player.Ready(true);
+					joueurs.remove(player);
+					continue;
+				}
+				
 				//ICI ON RENVOIE SON PLATEAU AU JOUEUR AVEC LE PERSO ET LES CONSIGNES
 				VisionJoueur v = new VisionJoueur(player);
 				player.send_message("Vous êtes actuellement "+joueurs.size()+" joueurs sur cette partie.");
@@ -119,38 +117,45 @@ public class Partie extends Thread{
 				
 			}
 			
-			
 			System.out.println("En attente des actions des joueurs...");
+			try {
 			for (Client player : joueurs) {
 				while(player.ReadyActions()==false && player.p.isAlive()) {
 					try {
-						if(player.getSocket().isClosed()) {
+						Thread.sleep(10);
+						if(player.isAlive()==false) {
+							System.out.println(player.getNom()+" a été déconnecté.");
+							Plateau.setOnePlateau(' ',player.p2.getPosition());
 							player.setActions("DDDD");
-							joueurs.remove(player);
-							continue;
 						}
-						else {
-							Thread.sleep(10);
-						}
+
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
+				if(player.isAlive()==true) {
 				System.out.println(player.getNom()+" est prêt.");
-				//ICI ON ATTEND LA CHAINE DE 4 CARACTERES ACTIONS DU JOUEUR
+				}
+				else {
+					joueurs.remove(player);
+				}
 			}
+			}catch(ConcurrentModificationException e) {
+		}
+			
+			//ICI ON ATTEND LA CHAINE DE 4 CARACTERES ACTIONS DU JOUEUR
 			for(int i=0;i<joueurs.size();i++) {
 				Client player = joueurs.get(i);
 				System.out.println(player.p);
 				System.out.println(player.actions);
 				player.p2.getPlateau().afficher();
 				System.out.println(" ");
-				player.send_message(player.Djoueurs.MoveClient(player.actions, player.p2 , player.p2.getPlateau(),Plateau));
+				player.send_message(player.Djoueurs.MoveClient(player.actions,Plateau));
 				player.send_message("fin actions.");
 				//Je mets à jour le plateau personnel du joueur afin qu'il ai un plateau perso correct
 				
 				player.p2.getPlateau().afficher();
-				player.D.Move(player.actions, player.p ,Plateau);//Je mets a jour le plateau
+				player.D.Move(player.actions);//Je mets a jour le plateau
 				//de la partie lorsqu'un joueur joue.
 				
 				Plateau.afficher();

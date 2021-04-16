@@ -6,17 +6,28 @@ import java.util.Random;
 public class Deplacements{
 	private boolean victoire=false;
 	private char caseActu;
+	private Personnage H;
+	private Plateaudejeu P;
 	// on va partir sur une base Z Q S D avec Z = avancer Q = gauche S= reculer et D = droite (ce qui est le plus fréquemment utilisé dans les jeux)
 	// on fait varier X les lignes et Y les colonnes pour se déplacer
 	
 
 	public Deplacements(Personnage H, Plateaudejeu P) {
-
+		setPersonnage(H);
+		setPlateaudejeu(P);
 	}
 	
 	public Deplacements(Personnage H) {
+		setPersonnage(H);
 	}
 	
+	public void setPersonnage(Personnage H) {
+		this.H=H;
+	}
+	
+	public void setPlateaudejeu(Plateaudejeu P) {
+		this.P=P;
+	}
 	//Fonction qui permet de retourner la case sur laquelle on se trouve.
 	public char getCaseActu(){
 		return caseActu;
@@ -28,7 +39,7 @@ public class Deplacements{
 	}
 	
 	//Déplacements gauche, droite, en haut, en bas et actions ( Ramasser, utiliser une potion... )
-	public void Dep(Personnage H, Plateaudejeu P, String dep) {
+	public void Dep(String dep) {
 		
 		int[] pos = H.getPosition();
 		int x = pos[0];
@@ -167,25 +178,25 @@ public class Deplacements{
 		
 
 	//Application de la fonction de déplacement pour les 4 actions
-	public void Move(String S, Personnage H, Plateaudejeu P) {
+	public void Move(String S) {
 		int i=0;
 		while((i<S.length())&&(!getVictoire())&&(H.isAlive())) {
 			String x = S.substring(i,i+1);
 			System.out.println("Déplacement:"+x);
-			Dep(H,P,x);
+			Dep(x);
 			//H.getPosition();
 			i++;
 		}
 		}
 	
 	
-	public String MoveClient(String S, Personnage H, Plateaudejeu P, Plateaudejeu plateaugeneral) {
+	public String MoveClient(String S, Plateaudejeu plateaugeneral) {
 		String str="";
 		int i=0;
 		while((i<S.length())&&(!getVictoire())&&(H.isAlive())) {
 			String x = S.substring(i,i+1);
 			str+="Déplacement:"+x+"  ";
-			str+=DepClient(H,P,x,plateaugeneral);
+			str+=DepClient(x,plateaugeneral);
 			i++;
 			}
 		return str;
@@ -201,7 +212,7 @@ public class Deplacements{
 	}
 	
 	//Déplacements gauche, droite, en haut, en bas et actions ( Ramasser, utiliser une potion... )
-		public String DepClient(Personnage H, Plateaudejeu P, String dep, Plateaudejeu plateaugeneral) {
+		public String DepClient(String dep, Plateaudejeu plateaugeneral) {
 			String str="";
 			int[] pos = H.getPosition();
 			int x = pos[0];
