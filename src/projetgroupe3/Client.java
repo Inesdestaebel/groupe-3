@@ -15,7 +15,6 @@ public class Client extends Thread{
 	    Personnage p2 = new Personnage (name);
 	    Deplacements D = new Deplacements(p);
 	    Deplacements Djoueurs = new Deplacements(p);
-	    private char[][] plateau;
 	    String actions="";
 	    
 	    public Client(Socket s) {
@@ -23,10 +22,6 @@ public class Client extends Thread{
 	    		setSocket(s);
 	    		out = new PrintStream( s.getOutputStream() );
 	    		in = new BufferedReader( new InputStreamReader( s.getInputStream() ) );
-	    		//while(true) {
-		    		//String rep = in.readLine();
-		    		//System.out.println(rep);
-	    	//	}
 	    	}catch(IOException e) {
 	    		e.printStackTrace();
 	    }
@@ -57,25 +52,6 @@ public class Client extends Thread{
 	   public void setFin(Boolean n) {
 		   this.fin=n;
 	   }
-	   
-	   public char[][] getPlateau(){
-		   return plateau;
-	   }
-	   
-	   public void setPlateau(int X, int Y) {
-		   this.plateau= new char[X][Y];
-		   for(int i=0; i<X;i++) {
-			   for(int j=0;j<Y;j++) {
-				   plateau[i][j]='?';
-			   }
-		   }
-	   }
-	   
-	   public void setOnePlateau(char c, int[]pos) {
-			plateau[pos[0]][pos[1]]=c;
-		}
-	   
-	   
 	    
 	    public void Ready(boolean a) {
 	    	this.ready=a;
@@ -212,6 +188,7 @@ public class Client extends Thread{
 				}
 	        }
 	       socket.close();
+	       sc.close();
 	    }
 }
 

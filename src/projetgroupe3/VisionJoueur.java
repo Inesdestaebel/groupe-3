@@ -1,17 +1,24 @@
 package projetgroupe3;
 
-import java.io.Serializable;
 
-public class VisionJoueur implements Serializable{
+public class VisionJoueur{
 	private Client player;
-	private Plateaudejeu map;
-	private Partie partie;
-	private Deplacements dep;
-
+	
+	
 	public VisionJoueur(Client player) {
+		setClient(player);
 	}
 	
-	public String showplateau(Client player) {
+	public void setClient(Client player) {
+		this.player=player;
+	}
+	
+	public Client getClient() {
+		return player;
+	}
+	
+	
+	public String showplateau() {
 		String a="";
 		for ( int x = 0 ; x<player.p2.getPlateau().getX(); x++ ) {
 			for ( int y = 0 ; y<player.p2.getPlateau().getY(); y++ ) {
@@ -22,11 +29,11 @@ public class VisionJoueur implements Serializable{
 		return a;
 		}
 	
-	public String showperso(Client player) {
+	public String showperso() {
 		return player.p.toString();
 	}
 	
-	public String demandeactions(Client player) {
+	public String demandeactions() {
 		String a="Z vous permet de monter";
 		a=a+"\n"+"S vous permet de descendre.";
 		a=a+"\n"+"D vous permet d'aller à droite.";

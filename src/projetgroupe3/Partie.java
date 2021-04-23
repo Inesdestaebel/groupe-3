@@ -90,11 +90,9 @@ public class Partie extends Thread{
 			player.D = new Deplacements(player.p,Plateau); 
 			player.Djoueurs = new Deplacements(player.p2,player.p2.getPlateau()); 
 			
-			player.p2.getPlateau().afficher(); //OK JUSTE
-			System.out.println("");
 			
 		}
-		Plateau.afficher(); //OK JUSTE
+		Plateau.afficher(); //Juste pour nous permettre de tester!
 		
 		boolean fin=false;
 		while(fin==false) {
@@ -109,10 +107,10 @@ public class Partie extends Thread{
 				//ICI ON RENVOIE SON PLATEAU AU JOUEUR AVEC LE PERSO ET LES CONSIGNES
 				VisionJoueur v = new VisionJoueur(player);
 				player.send_message("Vous êtes actuellement "+joueurs.size()+" joueurs sur cette partie.");
-				player.send_message(v.showplateau(player));
+				player.send_message(v.showplateau());
 				player.send_message("fin plateau.");
-				player.send_message(v.showperso(player));
-				player.send_message(v.demandeactions(player));
+				player.send_message(v.showperso());
+				player.send_message(v.demandeactions());
 				player.send_message("fin demande.");
 				
 			}
@@ -126,7 +124,7 @@ public class Partie extends Thread{
 						if(player.isAlive()==false) {
 							System.out.println(player.getNom()+" a été déconnecté.");
 							Plateau.setOnePlateau(' ',player.p2.getPosition());
-							player.setActions("DDDD");
+							player.setActions("DDDD"); //Pour que les actions passent à ready
 						}
 
 					} catch (InterruptedException e) {
@@ -146,19 +144,15 @@ public class Partie extends Thread{
 			//ICI ON ATTEND LA CHAINE DE 4 CARACTERES ACTIONS DU JOUEUR
 			for(int i=0;i<joueurs.size();i++) {
 				Client player = joueurs.get(i);
-				System.out.println(player.p);
-				System.out.println(player.actions);
-				player.p2.getPlateau().afficher();
 				System.out.println(" ");
 				player.send_message(player.Djoueurs.MoveClient(player.actions,Plateau));
 				player.send_message("fin actions.");
 				//Je mets à jour le plateau personnel du joueur afin qu'il ai un plateau perso correct
 				
-				player.p2.getPlateau().afficher();
-				player.D.Move(player.actions);//Je mets a jour le plateau
+				player.D.MoveClient(player.actions,Plateau);//Je mets a jour le plateau
 				//de la partie lorsqu'un joueur joue.
 				
-				Plateau.afficher();
+				//Plateau.afficher();
 				player.setActions("a"); //Pour que players.ReadyActions() passe à faux
 				System.out.println("");
 				
@@ -168,7 +162,9 @@ public class Partie extends Thread{
 					
 				}
 			}
-		
+			
+			Plateau.afficher();
+			
 			for (int i=0;i<joueurs.size();i++) {
 				Client player = joueurs.get(i);
 				//ON VERIFIE QUE LE PERSONNAGE N'EST PAS MORT

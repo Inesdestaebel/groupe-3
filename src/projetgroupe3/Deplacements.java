@@ -334,11 +334,13 @@ public class Deplacements{
 				H.trap();
 
 			}
-			
 			else if(plateaugeneral.valeurcase(pos2[0],pos2[1])=='H') {
+				if(pos2!=pos) {
 				str+="Vous marchez sur la même case qu'un autre joueur, -2PV.\n";
 				H.trap();
 			}
+			}
+			
 			
 			//Plus de vie...
 			if (H.getPV()<1) {

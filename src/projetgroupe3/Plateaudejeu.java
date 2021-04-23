@@ -13,17 +13,16 @@ public class Plateaudejeu {
 		private char[][] plateauPerso;
 		private int[] obj= new int[2];
 		
+		//Constructeurs
 		public Plateaudejeu(int X, int Y) {
 			setX(X);
 			setY(Y);
 			setPlateauXY();
 		}
 		
-		//Constructeur
 		public Plateaudejeu(int X, int Y, int murs, int pieges, int potions) {
 			setX(X);
 			setY(Y);
-			//setNbjoueur(nbjoueur);
 			setMursPiegesPotions(murs, pieges, potions);
 			setPlateau();
 			setPlateauPerso();
@@ -256,7 +255,6 @@ public class Plateaudejeu {
 			return pos;
 		}
 		
-		//public void reveal(int[2] coord)
 }
 
 
